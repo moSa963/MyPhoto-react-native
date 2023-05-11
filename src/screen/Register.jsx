@@ -65,18 +65,6 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: -75,
     },
-    card:{
-        position: 'absolute',
-        borderColor: 'blue',
-        borderRadius: 25,
-        borderWidth: 1,
-        backgroundColor: '#cccccce9',
-        width: '100%',
-        height: "80%",
-        overflow: 'hidden',
-        elevation: 5,
-        maxWidth: 350,
-    },
 });
 
 export default Register;
