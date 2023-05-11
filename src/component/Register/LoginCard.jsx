@@ -1,9 +1,9 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import ButtonList from "../Buttons/ButtonActions";
-import TextInput from "./TextInput";
-import { AuthStatus, Types } from "../context/AuthContext";
-import { Validator } from "../http/Validator";
+import TextInput from "../TextInput";
+import { AuthStatus, Types } from "../../context/AuthContext";
+import { Validator } from "../../http/Validator";
 
 const validator = new Validator({
     username: { min: 3, max: 50, match: /^[A-Za-z]+([._-]?[A-Za-z0-9]+)*$/s},
