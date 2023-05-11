@@ -47,26 +47,6 @@ const FollowButton = ({ user }) => {
 }
 
 
-const styles = StyleSheet.create({
-    root: {
-        borderRadius: 10,
-        flex: 1,
-        maxWidth: 75,
-        height: 30,
-        borderColor: 'blue',
-        borderWidth: 0.5,
-        overflow: 'hidden',
-    },
-    item: {
-        width: '100%',
-        height: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        overflow: 'hidden',
-    },
-});
-
-
 const followRequest = async (request, setIndex, username, unfollow = false) => {
     const res = await request("api/follow/" + username, unfollow ? "DELETE" : "POST");
 
