@@ -1,16 +1,10 @@
 import React, { Fragment } from "react";
-import { ImageProps, Image as ReactImage } from "react-native";
+import { Image as ReactImage } from "react-native";
 import { getHeader } from "../http/HttpRequest";
 import {Image as SvgImage} from "react-native-svg"; 
 import WaitingCard from "./WaitingCard";
 
-interface props extends ImageProps{
-    uri: string,
-    svg: boolean
-}
-
-
-const Image = ({ source, svg = false, ...rest }: props) => {
+const Image = ({ source, svg = false, ...rest }) => {
     const [token, setToken] = React.useState();
 
     React.useEffect(()=>{

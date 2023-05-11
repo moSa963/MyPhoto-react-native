@@ -1,13 +1,10 @@
 import React from "react";
-import { StyleSheet, View, ViewStyle, ViewProps } from "react-native";
+import { View } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 import TextInput from "./TextInput";
 
-interface props extends ViewProps{
-    onTextChange: Function,
-}
 
-const SearchBar = ({ onTextChange, ...rest }: props)=>{
+const SearchBar = ({ onTextChange, ...rest })=>{
     const [theme] = useTheme();
     const [text, setText] = React.useState("");
 

@@ -8,7 +8,7 @@ export const Themes = {
     dark: 1,
 }
 
-const alpha = (color: String, alpha: Number)=>{
+const alpha = (color, alpha)=>{
     return color.split('(').join('a(').split(')').join(',' + alpha + ')');
 }
 
@@ -45,4 +45,4 @@ const ThemeProvider = (props) => {
 export default ThemeProvider;
 
 
-export const useTheme = () : [typeof Light, (theme: typeof Themes) => void] => React.useContext(Context);
+export const useTheme = () => React.useContext(Context);

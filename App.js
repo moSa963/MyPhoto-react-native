@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import AuthProvider from './src/context/AuthContext';
 import RequestProvider from './src/context/RequestContext';
 import ThemeProvider from './src/context/ThemeContext';
