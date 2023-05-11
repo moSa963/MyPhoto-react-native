@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { Image as ReactImage } from "react-native";
-import { getHeader } from "../http/HttpRequest";
+import { getHeader } from "../../http/HttpRequest";
 import {Image as SvgImage} from "react-native-svg"; 
-import WaitingCard from "./WaitingCard";
+import WaitingCard from "../WaitingCard";
 
 const Image = ({ source, svg = false, ...rest }) => {
     const [token, setToken] = React.useState();

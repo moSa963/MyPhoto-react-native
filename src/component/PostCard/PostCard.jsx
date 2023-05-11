@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import ImageList from "../../container/ImageList";
+import ImageList from "../ImageList/ImageList";
 import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
 import { BASE_URL } from "../../http/HttpRequest";

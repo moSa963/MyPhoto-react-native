@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import Like from "../../component/Like";
-import { ListCounter } from "../../container/ImageList";
+import { ListCounter } from "../ImageList/ImageList";
 import { numberToStr } from "../../utils/numberToStr";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTheme } from "../../context/ThemeContext";

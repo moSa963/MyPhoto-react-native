@@ -4,7 +4,7 @@ import { useTheme } from '../context/ThemeContext';
 import { BASE_URL } from '../http/HttpRequest';
 import { FlatList } from 'react-native-gesture-handler';
 import ToolsBar from '../component/PostsToolsBar';
-import Image from '../component/Image';
+import Image from '../component/ImageList/Image';
 import { useRequest } from '../context/RequestContext';
 
 const PostItem = ({ post, onShowPost, theme }) => {
@@ -72,7 +72,7 @@ const PostList = ({ navigation, onScroll, ListHeaderComponent, onShowPost, user,
                 if (index === 0) {
                     return <ToolsBar onChange={handelToolChanged} />;
                 } else if (index > 3) {
-                    return <PostItem theme={theme} post={item} theme={theme} onShowPost={onShowPost} />
+                    return <PostItem theme={theme} post={item} onShowPost={onShowPost} />
                 }
             }}
         />

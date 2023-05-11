@@ -1,9 +1,9 @@
 import React from "react";
 import { Animated, StyleSheet, View } from "react-native";
-import ImageSwip from "../component/ImageSwipe";
+import ImageSwip from "./ImageSwipe";
 import Icon from "react-native-vector-icons/Ionicons";
-import { getHeader } from "../http/HttpRequest";
-import Image from "../component/Image";
+import { getHeader } from "../../http/HttpRequest";
+import Image from "./Image";
 
 export const ListCounter = ({ style = {}, count, index, color })=>{
     const anim = React.useRef(new Animated.Value(0)).current;

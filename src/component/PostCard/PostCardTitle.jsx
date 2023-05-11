@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { BASE_URL } from "../../http/HttpRequest";
 import { praseTime } from "../../utils/praseTime";
-import Image from "../Image";
+import Image from "../ImageList/Image";
 import { useTheme } from "../../context/ThemeContext";
 
 
