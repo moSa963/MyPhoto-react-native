@@ -48,12 +48,11 @@ const styles = StyleSheet.create({
 });
 
 const likeRequest = async (request, type, id, like, setLike) => {
-    const method = like ? "POST" : "DELETE";
-    const url = "api/like/" + type + "/";
+    const res = await request(`api/like/${type}/${id}`, like ? "POST" : "DELETE");
 
-    const res = await request(url + id, method);
-
-    if (res.ok) setLike(x => x == 1 ? 0 : 1);
+    if (res.ok) {
+        setLike(v => v ? 0 : 1);
+    }
 }
 
 export default Like;
