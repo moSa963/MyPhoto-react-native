@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View, ActivityIndicator } from "react-native";
-import ButtonList from "./ButtonActions";
+import ButtonList from "./Buttons/ButtonActions";
 import TextInput from "./TextInput";
 import { AuthStatus, Types } from "../context/AuthContext";
 import { Validator } from "../http/Validator";

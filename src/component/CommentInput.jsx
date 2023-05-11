@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useRequest } from "../context/RequestContext";
 import { useTheme } from "../context/ThemeContext";
-import Button from "./Button";
+import Button from "./Buttons/Button";
 import TextInput from "./TextInput";
 
 

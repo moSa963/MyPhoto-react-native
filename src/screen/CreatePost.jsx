@@ -3,7 +3,7 @@ import { StyleSheet, View, ScrollView, Switch, Text, ActivityIndicator } from 'r
 import TextInput from '../component/TextInput';
 import { useTheme } from '../context/ThemeContext';
 import ImageInput from '../component/ImageInput/ImageInput';
-import ButtonList from '../component/ButtonActions';
+import ButtonList from '../component/Buttons/ButtonActions';
 import { useRequest } from '../context/RequestContext';
 
 
@@ -11,7 +11,7 @@ const CreatePost = ({ navigation }) => {
     const [input, setInput] = React.useState({ images: [] });
     const [errors, setErrors] = React.useState({ images: [] });
     const [processing, setProcessing] = React.useState(false);
-    const [theme, setTheme] = useTheme();
+    const [theme] = useTheme();
     const request = useRequest();
 
     const handleChange = (key, value) => {

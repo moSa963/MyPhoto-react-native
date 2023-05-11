@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, Animated } from "react-native";
+import { StyleSheet, Animated } from "react-native";
 import Button2 from "./Button2";
 
 

@@ -2,9 +2,8 @@ import React from "react";
 import { StatusBar, StyleSheet, Text, View, Animated, ImageBackground, ActivityIndicator } from "react-native";
 import LoginCard from "../component/LoginCard";
 import back from "../../assets/rb.jpg";
-import ButtonActions from "../component/ButtonActions";
+import ButtonActions from "../component/Buttons/ButtonActions";
 import SignupCard from "../component/SignupCard";
-import { AuthStatus } from "../context/AuthContext";
 
 
 const NavButton = ({ setIndex, index }) => {

@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 import { useRequest } from "../context/RequestContext";
 import { useTheme } from "../context/ThemeContext";
-import ButtonActions from "./ButtonActions";
+import ButtonActions from "./Buttons/ButtonActions";
 
 
 const FollowButton = ({ user }) => {
