@@ -1,10 +1,10 @@
 import React from "react";
 import { ActivityIndicator, FlatList } from "react-native";
-import FollowButton from "../component/FollowButton";
-import User from "../component/User";
-import { useAuth } from "../context/AuthContext";
-import { useRequest } from "../context/RequestContext";
-import { useTheme } from "../context/ThemeContext";
+import FollowButton from "../FollowButton";
+import User from "./User";
+import { useAuth } from "../../context/AuthContext";
+import { useRequest } from "../../context/RequestContext";
+import { useTheme } from "../../context/ThemeContext";
 
 
 const defaultMap = (user, showUser) => {

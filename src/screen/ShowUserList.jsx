@@ -2,8 +2,8 @@ import React from "react";
 import { View } from "react-native";
 import AcceptButton from "../component/AcceptButton";
 import SearchBar from "../component/SearchBar";
-import User from "../component/User";
-import UserList from "../container/UserList";
+import User from "../component/UsersList/User";
+import UserList from "../component/UsersList/UserList";
 
 const ShowUserList = ({ route, navigation }) => {
     const [searchKey, setSearchKey] = React.useState(null);

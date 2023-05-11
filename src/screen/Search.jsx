@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import SearchBar from "../component/SearchBar";
-import UserList from "../container/UserList";
+import UserList from "../component/UsersList/UserList";
 import { useTheme } from "../context/ThemeContext";
 
 

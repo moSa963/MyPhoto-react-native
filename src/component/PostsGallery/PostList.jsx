@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, RefreshControl, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, RefreshControl } from 'react-native';
 import { useTheme } from '../../context/ThemeContext';
 import { FlatList } from 'react-native-gesture-handler';
 import ToolsBar from '../PostsToolsBar';
 import { useRequest } from '../../context/RequestContext';
+import PostListItem from './PostListItem';
 
 
 
@@ -55,7 +56,7 @@ const PostList = ({ navigation, onScroll, ListHeaderComponent, onShowPost, user,
                 if (index === 0) {
                     return <ToolsBar onChange={handelToolChanged} />;
                 } else if (index > 3) {
-                    return <PostItem theme={theme} post={item} onShowPost={onShowPost} />
+                    return <PostListItem theme={theme} post={item} onShowPost={onShowPost} />
                 }
             }}
         />

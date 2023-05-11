@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { useTheme } from "../context/ThemeContext";
-import { BASE_URL } from "../http/HttpRequest";
-import Image from "./ImageList/Image";
+import { useTheme } from "../../context/ThemeContext";
+import { BASE_URL } from "../../http/HttpRequest";
+import Image from "../ImageList/Image";
 
 
 const User = ({ user, onPress, children, small }) => {
