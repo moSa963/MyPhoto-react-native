@@ -7,7 +7,7 @@ import Button from "../component/Button";
 import PostList from "../container/PostList";
 import UserBanner from "../component/UserBanner";
 import Icon from "react-native-vector-icons/AntDesign";
-import { getImage } from '../ImagePicker';
+import { launchLibrary } from '../utils/ImagePicker';
 import WaitingCard from "../component/WaitingCard";
 import { useRequest } from "../context/RequestContext";
 
@@ -102,7 +102,7 @@ const getUser = async (request, username, setUser, setIsPrivate) => {
 }
 
 const startPicker = async (onUploaded)=>{
-    const img = await getImage(false);
+    const img = await launchLibrary(false);
 
     if (img){
         onUploaded(img);
