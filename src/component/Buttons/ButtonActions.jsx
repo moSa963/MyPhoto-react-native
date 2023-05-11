@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Animated } from "react-native";
+import { Animated } from "react-native";
 import Button2 from "./Button2";
 
 
@@ -32,12 +32,5 @@ const ButtonActions = ({ index, style, effectWidth = 2, onPress, children }) =>{
         </Button2>
     );
 }
-
-
-const styles = StyleSheet.create({
-    root:{
-
-    },
-});
 
 export default ButtonActions;

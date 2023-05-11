@@ -1,9 +1,9 @@
 import React from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from "react-native";
-import ButtonList from "./Buttons/ButtonActions";
-import TextInput from "./TextInput";
-import { Validator } from "../http/Validator";
-import { AuthStatus, Types } from "../context/AuthContext";
+import ButtonList from "../Buttons/ButtonActions";
+import TextInput from "../TextInput";
+import { Validator } from "../../http/Validator";
+import { AuthStatus, Types } from "../../context/AuthContext";
 
 const validator = new Validator({
     first_name: {min: 3, max: 50},
