@@ -22,14 +22,14 @@ const Image = ({ source, svg = false, ...rest }) => {
 
         return (
             <Fragment>
-                <ReactImage  {...rest} source={{uri: source.uri, headers: { "Authorization": token }}} style={{ display: 'none' }}/>
-                <SvgImage {...rest} href={{ uri: source.uri, headers: { "Authorization": token } }} />
+                <ReactImage source={{uri: source.uri, headers: { Authorization: token }}} style={{ display: 'none' }}/>
+                <SvgImage {...rest} href={{ uri: source.uri, headers: { Authorization: token } }} />
             </Fragment>
         )
     }
 
     return(
-        <ReactImage {...rest} source={{uri: source.uri, headers: {"Authorization": token}}} />
+        <ReactImage {...rest} source={{uri: source.uri, headers: {Authorization: token}}} />
     );
 }
 
