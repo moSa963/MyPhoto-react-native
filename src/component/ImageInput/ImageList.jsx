@@ -1,12 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Image, Animated } from 'react-native';
 import Icon from "react-native-vector-icons/Entypo";
-import { launchCamera, launchLibrary } from '../utils/ImagePicker';
 
 const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 
-const ImageInput = ({ onChange, theme, list }) => {
-    const [lock, setLock] = React.useState(false);
+const ImageList = ({ list, onChange, theme }) => {
     const [deleteMode, setDeleteMode] = React.useState(false);
     const [toValue, setToValue] = React.useState(0);
     const anim = React.useRef(new Animated.Value(0.5)).current;
@@ -25,59 +23,20 @@ const ImageInput = ({ onChange, theme, list }) => {
         });
     }, [anim, deleteMode, toValue]);
 
-    const startPicker = async () => {
-        if (!lock) {
-            setLock(true);
-
-            const img = await launchLibrary();
-
-
-            if (img) {
-                onChange([...list, img]);
-            }
-
-            setLock(false);
-        }
-    }
-
-    const startCam = async () => {
-        if (!lock) {
-            setLock(true);
-
-            const img = await launchCamera();
-
-
-            if (img) {
-                onChange([...list, img]);
-            }
-
-            setLock(false);
-        }
-    }
-
 
     const handleLongPress = () => {
         setDeleteMode(!deleteMode);
         setToValue(0);
     }
 
-    const handleDelete = (element, index) => {
+    const handleDelete = (_, index) => {
         list = list.filter((e, i) => i != index);
-        if (list.length <= 0) {
-            setDeleteMode(false);
-        }
+        setDeleteMode(list.length <= 0);
         onChange([...list]);
     }
 
     return (
-        <View style={[styles.root, { borderColor: theme.colors.text }]}>
-            {
-                list.length < 5 &&
-                <>
-                    <TouchableOpacity style={[styles.itemCont, { borderColor: theme.colors.text }]} onPress={startPicker}><Icon name="images" size={35} color={theme.colors.text} /></TouchableOpacity>
-                    <TouchableOpacity style={[styles.itemCont, { borderColor: theme.colors.text }]} onPress={startCam}><Icon name="camera" size={35} color={theme.colors.text} /></TouchableOpacity>
-                </>
-            }
+        <React.Fragment>
             {
                 list.map((e, i) => (
                     <AnimatedTouchableOpacity onLongPress={handleLongPress}
@@ -99,22 +58,12 @@ const ImageInput = ({ onChange, theme, list }) => {
                     </AnimatedTouchableOpacity>
                 ))
             }
-        </View>
+        </React.Fragment>
     );
 }
 
 
 const styles = StyleSheet.create({
-    root: {
-        position: 'relative',
-        borderWidth: 0.5,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        borderRadius: 1,
-        borderStyle: 'dashed',
-        justifyContent: 'center',
-        marginVertical: 25,
-    },
     itemCont: {
         width: '45%',
         height: '100%',
@@ -142,4 +91,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default ImageInput;
+export default ImageList;

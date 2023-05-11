@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, ScrollView, Switch, Text, ActivityIndicator } from 'react-native';
 import TextInput from '../component/TextInput';
 import { useTheme } from '../context/ThemeContext';
-import ImageInput from '../component/ImageInput';
+import ImageInput from '../component/ImageInput/ImageInput';
 import ButtonList from '../component/ButtonActions';
 import { useRequest } from '../context/RequestContext';
 
