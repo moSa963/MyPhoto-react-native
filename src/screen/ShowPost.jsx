@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { StyleSheet, ScrollView, TouchableOpacity, View, Text, Switch, ActivityIndicator, RefreshControl } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import PostCard from "../component/PostCard";
+import PostCard from "../component/PostCard/PostCard";
 import { useTheme } from '../context/ThemeContext';
 import Icon from "react-native-vector-icons/AntDesign";
 import BottomCard from '../container/BottomCard';
