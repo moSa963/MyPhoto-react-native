@@ -1,7 +1,7 @@
 import React from "react";
 import { Animated } from "react-native";
 import Svg, {Defs, ClipPath, G, Rect, Path as SvgPath} from "react-native-svg";
-import { interpolate } from "../utils";
+import { interpolate } from "../utils/interpolate";
 import Image from "./Image";
 
 const AnimatedPath = Animated.createAnimatedComponent(SvgPath);

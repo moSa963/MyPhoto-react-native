@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 import Like from "./Like";
 import User from "./User";
-import {praseTime} from "../utils";
+import {praseTime} from "../utils/praseTime";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useAuth } from "../context/AuthContext";
 

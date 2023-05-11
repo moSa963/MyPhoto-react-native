@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, Animated } from 'react-native';
 import { useAuth } from '../context/AuthContext';
 import { BASE_URL } from '../http/HttpRequest';
-import { numberToStr } from '../utils';
+import { numberToStr } from '../utils/numberToStr';
 import Button from './Button';
 import FollowButton from './FollowButton';
 import Image from './Image';

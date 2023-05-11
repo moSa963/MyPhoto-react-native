@@ -5,7 +5,8 @@ import ImageList, { ListCounter } from "../container/ImageList";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
 import { BASE_URL } from "../http/HttpRequest";
-import { praseTime, numberToStr } from "../utils";
+import { numberToStr } from "../utils/numberToStr";
+import { praseTime } from "../utils/praseTime";
 import Image from "./Image";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 

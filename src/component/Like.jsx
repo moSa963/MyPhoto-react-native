@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Animated, Text } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useRequest } from "../context/RequestContext";
-import { numberToStr } from "../utils";
+import { numberToStr } from "../utils/numberToStr";
 
 const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 
