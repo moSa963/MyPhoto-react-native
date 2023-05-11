@@ -1,5 +1,5 @@
 import * as SecureStore from "expo-secure-store";
-export const BASE_URL = "http://192.168.0.11:8000/";
+export const BASE_URL = "http://192.168.1.103:8000/";
 
 const refresh = async () => {
     const refreshKey = await SecureStore.getItemAsync("refresh_key");

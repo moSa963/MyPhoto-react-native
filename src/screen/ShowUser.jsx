@@ -3,7 +3,7 @@ import { View, StyleSheet, Animated, TouchableOpacity, Text } from "react-native
 import BottomCard from "../container/BottomCard";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
-import PostList from "../container/PostList";
+import PostList from "../component/PostsGallery/PostList";
 import UserBanner from "../component/UserBanner";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useRequest } from "../context/RequestContext";

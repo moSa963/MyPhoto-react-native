@@ -4,7 +4,7 @@ import BottomCard from "../container/BottomCard";
 import { Types, useAuth } from "../context/AuthContext";
 import { Themes, useTheme } from "../context/ThemeContext";
 import Button from "../component/Buttons/Button";
-import PostList from "../container/PostList";
+import PostList from "../component/PostsGallery/PostList";
 import UserBanner from "../component/UserBanner";
 import Icon from "react-native-vector-icons/AntDesign";
 import { launchLibrary } from '../utils/ImagePicker';

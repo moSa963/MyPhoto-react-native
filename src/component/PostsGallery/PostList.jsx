@@ -3,9 +3,9 @@ import { StyleSheet, RefreshControl, TouchableOpacity, View } from 'react-native
 import { useTheme } from '../context/ThemeContext';
 import { BASE_URL } from '../http/HttpRequest';
 import { FlatList } from 'react-native-gesture-handler';
-import ToolsBar from '../component/PostsToolsBar';
-import Image from '../component/ImageList/Image';
-import { useRequest } from '../context/RequestContext';
+import ToolsBar from '../PostsToolsBar';
+import Image from '../ImageList/Image';
+import { useRequest } from '../../context/RequestContext';
 
 const PostItem = ({ post, onShowPost, theme }) => {
 
