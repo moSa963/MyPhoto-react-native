@@ -21,8 +21,8 @@ A simple photo sharing social networking application.<br />
 
 ## Preview
 <p>
-<img src="https://github.com/moSa963/MyPhoto/blob/master/preview.jpg" width="400" >
-<img src="https://github.com/moSa963/MyPhoto/blob/master/preview1.jpg" width="400" >
-<img src="https://github.com/moSa963/MyPhoto/blob/master/preview2.jpg" width="400" >
+<img src="https://github.com/moSa963/MyPhoto-react-native/blob/master/preview.jpg" width="400" >
+<img src="https://github.com/moSa963/MyPhoto-react-native/blob/master/preview1.jpg" width="400" >
+<img src="https://github.com/moSa963/MyPhoto-react-native/blob/master/preview2.jpg" width="400" >
 </p>
 
