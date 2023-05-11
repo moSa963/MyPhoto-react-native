@@ -4,7 +4,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import PostCard from "../component/PostCard/PostCard";
 import { useTheme } from '../context/ThemeContext';
 import Icon from "react-native-vector-icons/AntDesign";
-import BottomCard from '../container/BottomCard';
+import BottomCard from '../component/BottomCard';
 import Button from '../component/Buttons/Button';
 import { useAuth } from '../context/AuthContext';
 import WaitingCard from '../component/WaitingCard';

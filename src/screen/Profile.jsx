@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Animated, Text, Switch, TouchableOpacity } from "react-native";
-import BottomCard from "../container/BottomCard";
+import BottomCard from "../component/BottomCard";
 import { Types, useAuth } from "../context/AuthContext";
 import { Themes, useTheme } from "../context/ThemeContext";
 import Button from "../component/Buttons/Button";
