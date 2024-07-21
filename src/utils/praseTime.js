@@ -1,27 +1,20 @@
-export const praseTime = (timeStr)=>{
-    const milis = Date.now() - Date.parse(timeStr);
-    var output = milis * 1.65344e-9;
+export const parseTime = (timeStr) => {
+    const millis = Date.now() - Date.parse(timeStr);
+    const seconds = millis / 1000;
+    const minutes = seconds / 60;
+    const hours = minutes / 60;
+    const days = hours / 24;
+    const years = days / 365;
 
-    if (output >= 1){
+    if (years >= 1) {
         return new Date(timeStr).toUTCString();
+    } else if (days >= 1) {
+        return days.toFixed() + " days";
+    } else if (hours >= 1) {
+        return hours.toFixed() + " hours";
+    } else if (minutes >= 1) {
+        return minutes.toFixed() + " minutes";
+    } else {
+        return seconds.toFixed() + " seconds";
     }
-
-    output = milis * 1.15741e-8;
-    if (output >= 1){
-        return output.toFixed() + " days";
-    }
-
-    output = milis * 2.77778e-7;
-    if (output >= 1){
-        return output.toFixed() + " hours";
-    }
-
-    output = milis * 1.66667e-5;
-    if (output >= 1){
-        return output.toFixed() + " minute";
-    }
-
-    output = milis * 0.001;
-    return output.toFixed() + " seconds";
-    
 }
