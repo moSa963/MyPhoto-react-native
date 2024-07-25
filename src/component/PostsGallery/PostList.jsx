@@ -81,13 +81,13 @@ const styles = StyleSheet.create({
 });
 
 const getPosts = async (request, setList, setNext, username, type, sortBy) => {
-    var quary = "?user=" + username + "&sort=" + sortBy;
+    var quary = "?sort=" + sortBy;
 
     var url = "";
 
-    if (type === "posts") url = "api/post/list";
-    else if (type === "history") url = "api/history/list";
-    else if (type === "liked") url = "api/like/post/list";
+    if (type === "posts") url = `api/posts/list/${username}`;
+    else if (type === "history") url = `api/posts/list/${username}`;
+    else if (type === "liked") url = `api/posts/list/${username}/liked`;
 
     const res = await request(url + quary);
 

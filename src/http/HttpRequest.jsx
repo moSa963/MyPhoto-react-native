@@ -6,7 +6,7 @@ const refresh = async () => {
 
     if (!refreshKey) return false;
 
-    const response = await fetch(BASE_URL + "api/token/refresh", {
+    const response = await fetch(BASE_URL + "api/users/token/refresh", {
         method: "POST",
         headers:{
             'Accept': "application/json",

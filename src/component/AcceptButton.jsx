@@ -13,7 +13,7 @@ const AcceptButton = ({ follow }) => {
     const handlePress = (e) => {
         if (index == 1) {
             setIndex(0);
-            acceptRequest(request, follow.id, setIndex)
+            acceptRequest(request, follow.user.username, setIndex)
         }
     }
 
@@ -35,8 +35,8 @@ const AcceptButton = ({ follow }) => {
     );
 }
 
-const acceptRequest = async (request, id, setIndex) => {
-    const res = await request("api/follow/accept/" + id, "PUT");
+const acceptRequest = async (request, username, setIndex) => {
+    const res = await request("api/follow/accept/" + username, "PUT");
 
     if (res.ok) return setIndex(2);
 

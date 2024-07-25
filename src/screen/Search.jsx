@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 
 const getUsers = async (request, setList, setNext, key) => {
 
-    const res = await request("api/user/list/" + key);
+    const res = await request("api/users/list/" + key);
 
     if (res.ok) {
         const js = await res.json();

@@ -94,7 +94,7 @@ const ShowPost = ({ navigation, route }) => {
     }
 
     const handleDelete = (c) => {
-        deleteComment(request, c.id, setComments);
+        deleteComment(request, post.id, c.id, setComments);
     }
 
     if (!post) return <WaitingCard />
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
 
 
 const getPost = async (request, id, setPost) => {
-    const res = await request("api/post/" + id);
+    const res = await request(`api/posts/${id}/`);
 
     if (res.ok) {
         const js = await res.json();
@@ -142,7 +142,7 @@ const getPost = async (request, id, setPost) => {
 }
 
 const deletePost = async (request, id, nav) => {
-    const res = await request("api/post/" + id, "DELETE");
+    const res = await request(`api/posts/${id}/`, "DELETE");
 
     if (res.ok) {
         nav.goBack();
@@ -153,14 +153,14 @@ const update = async (request, id, isPrivate, setIsPrivate) => {
     const form = new FormData();
     form.append("is_private", isPrivate);
 
-    const res = await request("api/post/" + id, "PUT", form);
+    const res = await request(`api/posts/${id}/`, "PUT", form);
 
     if (res.ok) setIsPrivate(isPrivate);
 }
 
-const loadComments = async (request, id, setComments, setNext) => {
+const loadComments = async (request, id, post_id, setComments, setNext) => {
 
-    const res = await request("api/comment/post/" + id);
+    const res = await request(`api/posts/${id}/comments/`);
 
     if (res.ok) {
         const js = await res.json();
@@ -187,8 +187,8 @@ const loadNextComments = async (request, next, setComments, setNext, setProcessi
 }
 
 
-const deleteComment = async (request, id, setComments) => {
-    const res = await request("api/comment/" + id, "DELETE");
+const deleteComment = async (request, post_id, id, setComments) => {
+    const res = await request(`api/posts/${post_id}/comments/${id}/`, "DELETE");
 
     if (res.ok) {
         setComments(list => {

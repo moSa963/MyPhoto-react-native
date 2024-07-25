@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
 
 const getUser = async (request, username, setUser, setIsPrivate) => {
 
-        const res = await request("api/user/" + username);
+        const res = await request("api/users/" + username);
 
         if (res.ok){
             const js = await res.json();
@@ -127,7 +127,7 @@ const updateRequest = async (request, { is_private, image }, setIsPrivate) => {
         is_private !== undefined && form.append("is_private", is_private);
         image !== undefined && form.append("image", image);
     
-        const res = await request('api/user', "PUT", form);
+        const res = await request('api/users/', "PUT", form);
     
         if (res.ok){
             const js = await res.json();

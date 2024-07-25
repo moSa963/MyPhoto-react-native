@@ -44,8 +44,7 @@ const sendComment = async (request, post_id, content) => {
     form.append("content", content);
     form.append("post_id", post_id);
 
-    const res = await request("api/comment/", "POST", form);
-
+    const res = await request(`api/posts/${post_id}/comments/`, "POST", form);
 }
 
 export default CommentInput;

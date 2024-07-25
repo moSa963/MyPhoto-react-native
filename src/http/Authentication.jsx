@@ -1,7 +1,7 @@
 import * as SecureStore from "expo-secure-store";
 
 const getUser =  async (request)=>{
-    return await request("api/login");
+    return await request("api/users/login");
 }
 
 export const login = async (request, { username, password, remember = false })=>{
@@ -9,7 +9,7 @@ export const login = async (request, { username, password, remember = false })=>
     form.append("username", username);
     form.append("password", password);
 
-    const response = await request("api/login", "POST", form);
+    const response = await request("api/users/login/", "POST", form);
 
     return response; 
 }
@@ -23,7 +23,7 @@ export const regester = async (request, { first_name, last_name, username, email
     form.append("password", password);
     form.append("password_confirmation", password_confirmation);
 
-    const response = await request("api/register", "POST", form);
+    const response = await request("api/users/register/", "POST", form);
 
     return response; 
 }

@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 const getPosts = async (request, setList, setNext, setRefreshing) => {
     setRefreshing(true);
 
-    const res = await request("api/post/list");
+    const res = await request("api/posts/list");
 
     if (res.ok) {
         const js = await res.json();

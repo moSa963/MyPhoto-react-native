@@ -102,7 +102,7 @@ const create = async (request, { title = "", description = "", is_private = fals
         form.append("image", file);
     });
 
-    const res = await request("api/post/", "POST", form);
+    const res = await request("api/posts/", "POST", form);
 
     if (res){
         if (res.ok) {

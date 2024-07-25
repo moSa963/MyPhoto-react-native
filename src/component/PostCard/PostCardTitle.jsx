@@ -13,7 +13,7 @@ const Title = ({ title, post, onShowPost, onShowUser }) => {
         <View style={{ width: '100%' }}>
             <View style={styles.root}>
                 <TouchableOpacity activeOpacity={onShowUser ? 0.7 : 1} onPress={() => { onShowUser && onShowUser(post.user) }}>
-                    <Image source={{ uri: `${BASE_URL}api/user/image/${post.user.username}`}}
+                    <Image source={{ uri: `${BASE_URL}api/users/${post.user.username}/image`}}
                         style={{ width: 50, height: 50, borderWidth: 2, borderColor: theme.colors.border, borderRadius: 25, }} />
                 </TouchableOpacity>
 

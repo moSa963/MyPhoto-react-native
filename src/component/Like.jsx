@@ -48,7 +48,15 @@ const styles = StyleSheet.create({
 });
 
 const likeRequest = async (request, type, id, like, setLike) => {
-    const res = await request(`api/like/${type}/${id}`, like ? "POST" : "DELETE");
+    url = ""
+
+    if (type == "post"){
+        url = `api/posts/${id}/likes/`
+    }else {
+        url = `api/comments/${id}/likes/`
+    }
+
+    const res = await request(url, like ? "POST" : "DELETE");
 
     if (res.ok) {
         setLike(v => v ? 0 : 1);

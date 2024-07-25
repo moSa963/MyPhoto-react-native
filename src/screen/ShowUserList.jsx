@@ -55,9 +55,9 @@ const getUsers = async (request, setList, setNext, key, username, type) => {
     key && (quary += "&key=" + key);
 
     if (type === "following") {
-        url = "api/follow/following/" + username;
+        url = `api/follow/${username}/following/list`;
     } else if (type === "followers" || type === "requests") {
-        url = "api/follow/followers/" + username;
+        url = `api/follow/${username}/followers/list`;
     }
 
     const res = await request(url + quary);
