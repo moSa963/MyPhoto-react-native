@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-import Button from "../component/Buttons/Button";
+import Button from "../components/Buttons/Button";
 import request, { BASE_URL } from "../http/HttpRequest";
 import { useTheme } from "./ThemeContext";
 
