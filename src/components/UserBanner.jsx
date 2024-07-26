@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Animated } from 'react-native';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../hooks/AuthContext';
 import { BASE_URL } from '../http/HttpRequest';
 import { numberToStr } from '../utils/numberToStr';
 import Button from './Buttons/Button';

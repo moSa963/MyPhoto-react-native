@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
-import { useRequest } from "../context/RequestContext";
-import { useTheme } from "../context/ThemeContext";
+import { useRequest } from "../hooks/RequestContext";
+import { useTheme } from "../hooks/ThemeContext";
 import ButtonActions from "./Buttons/ButtonActions";
 
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { ActivityIndicator, View } from "react-native";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../hooks/ThemeContext";
 
 
 
