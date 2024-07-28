@@ -1,20 +1,20 @@
 import * as SecureStore from "expo-secure-store";
 
-const getUser =  async (request)=>{
-    return await request("api/users/login");
+const getUser = async (request) => {
+    return await request("api/users");
 }
 
-export const login = async (request, { username, password, remember = false })=>{
+export const login = async (request, { username, password, remember = false }) => {
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
 
     const response = await request("api/users/login/", "POST", form);
 
-    return response; 
+    return response;
 }
 
-export const regester = async (request, { first_name, last_name, username, email, password, password_confirmation, remember })=>{
+export const register = async (request, { first_name, last_name, username, email, password, password_confirmation, remember }) => {
     const form = new FormData();
     form.append("first_name", first_name);
     form.append("last_name", last_name);
@@ -25,11 +25,11 @@ export const regester = async (request, { first_name, last_name, username, email
 
     const response = await request("api/users/register/", "POST", form);
 
-    return response; 
+    return response;
 }
 
 
-export const logout = async ()=>{
+export const logout = async () => {
     await SecureStore.deleteItemAsync('access_key');
     await SecureStore.deleteItemAsync('refresh_key');
     return true;

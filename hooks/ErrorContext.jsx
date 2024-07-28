@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
-import Button from "../component/Buttons/Button";
+import Button from "@/components/Buttons/Button";
 import { useTheme } from "./ThemeContext";
 
 const Context = createContext();

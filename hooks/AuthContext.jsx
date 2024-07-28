@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import getUser, { login, logout, regester } from "../http/Authentication";
+import getUser, { login, logout, register } from "@/http/Authentication";
 import * as SecureStore from "expo-secure-store";
 import { useRequest } from "./RequestContext";
 
@@ -60,7 +60,7 @@ const authRequest = async (request, type, data, setErrors, setAuth, auth) => {
             break;
         }
         case Types.SIGNUP: {
-            processAuthRequest(request, regester, data, setAuth, setErrors);
+            processAuthRequest(request, register, data, setAuth, setErrors);
             break;
         }
         case Types.LOGOUT: {
