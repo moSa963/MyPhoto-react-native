@@ -1,23 +1,27 @@
 import React from "react";
-import { View, StyleSheet, Animated, TouchableOpacity, Text } from "react-native";
-import BottomCard from "../component/BottomCard";
-import { useAuth } from "../context/AuthContext";
-import { useTheme } from "../context/ThemeContext";
-import PostList from "../component/PostsGallery/PostList";
-import UserBanner from "../component/UserBanner";
+import { View, StyleSheet, Animated, TouchableOpacity } from "react-native";
+import BottomCard from "@/components/BottomCard";
+import { useAuth } from "@/hooks/AuthContext";
+import { useTheme } from "@/hooks/ThemeContext";
+import PostList from "@/components/PostsGallery/PostList";
+import UserBanner from "@/components/UserBanner";
 import Icon from "react-native-vector-icons/AntDesign";
-import { useRequest } from "../context/RequestContext";
+import { useRequest } from "@/hooks/RequestContext";
+import { useGlobalSearchParams, useNavigation, useRouter } from "expo-router";
 
-const ShowUser = ({ navigation, route }) => {
+const ShowUser = () => {
     const [theme] = useTheme();
     const [settingsCard, setSettingsCard] = React.useState(false);
     const anim = React.useRef(new Animated.Value(0)).current;
     const [user, setUser] = React.useState();
     const [auth] = useAuth();
     const request = useRequest();
+    const navigation = useNavigation()
+    const param = useGlobalSearchParams()
+    const router = useRouter();
 
     React.useEffect(() => {
-        getUser(request, route.params?.username || auth.user.username, setUser);
+        getUser(request, param.user, setUser);
     }, []);
 
     React.useLayoutEffect(() => {
@@ -34,7 +38,7 @@ const ShowUser = ({ navigation, route }) => {
     }, [navigation, user]);
 
     const handleShowPost = (post) => {
-        navigation.push("ShowPost", { post: post });
+        router.push(`/posts/${post.id}`);
     }
 
     if (!user) return <View></View>;

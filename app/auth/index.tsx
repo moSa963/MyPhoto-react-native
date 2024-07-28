@@ -1,16 +1,18 @@
 import React from "react";
 import { StatusBar, StyleSheet, Text, View, Animated, ImageBackground } from "react-native";
-import back from "../../assets/rb.jpg";
-import RegisterCardsContainer from "../component/Register/RegisterCardsContainer";
-import RegisterNavButton from "../component/Register/RegisterNavButton";
+import RegisterCardsContainer from "@/components/Register/RegisterCardsContainer";
+import RegisterNavButton from "@/components/Register/RegisterNavButton";
+import { AuthStatus, useAuth } from "@/hooks/AuthContext";
 
 
-const Register = ({ auth, setAuth })=>{
+const Register = () => {
     const anim = React.useRef(new Animated.Value(0.5)).current;
     const [index, setIndex] = React.useState(false);
+    const [auth, setAuth] = useAuth();
 
-    React.useEffect(()=>{
-        Animated.spring(anim,{
+
+    React.useEffect(() => {
+        Animated.spring(anim, {
             toValue: index ? 0 : 1,
             useNativeDriver: false,
             stiffness: 50,
@@ -22,12 +24,12 @@ const Register = ({ auth, setAuth })=>{
 
     return (
         <View style={styles.root}>
-            <StatusBar  backgroundColor="#00000000"  translucent={true} />
+            <StatusBar backgroundColor="#00000000" translucent={true} />
 
             <View style={styles.header}>
-                <ImageBackground source={back} 
+                <ImageBackground source={require("@/assets/images/rb.jpg")}
                     resizeMode="cover"
-                    style={{ alignItems: 'center', width: "100%", height:"100%" }}>
+                    style={{ alignItems: 'center', width: "100%", height: "100%" }}>
                     <View style={{ width: '100%', height: '100%', backgroundColor: '#00000099', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={styles.title}>MY PHOTO</Text>
                     </View>
@@ -35,7 +37,7 @@ const Register = ({ auth, setAuth })=>{
             </View>
 
             <View style={styles.cardCont} >
-                <RegisterNavButton setIndex={setIndex} index={index}/>
+                <RegisterNavButton setIndex={setIndex} index={index} />
                 <RegisterCardsContainer anim={anim} auth={auth} setAuth={setAuth} />
             </View>
         </View>
@@ -43,25 +45,25 @@ const Register = ({ auth, setAuth })=>{
 }
 
 const styles = StyleSheet.create({
-    root:{
+    root: {
         display: 'flex',
         height: '100%',
         backgroundColor: '#333',
     },
-    header:{
+    header: {
         width: '100%',
         height: '30%',
         alignItems: 'center',
         backgroundColor: 'black',
     },
-    title:{
+    title: {
         alignSelf: 'center',
         fontSize: 35,
         color: "#fff"
     },
-    cardCont:{
+    cardCont: {
         display: 'flex',
-        alignItems:'center',
+        alignItems: 'center',
         flex: 1,
         marginTop: -75,
     },

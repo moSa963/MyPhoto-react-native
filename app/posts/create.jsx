@@ -1,18 +1,20 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView, Switch, Text, ActivityIndicator } from 'react-native';
-import TextInput from '../component/TextInput';
-import { useTheme } from '../context/ThemeContext';
-import ImageInput from '../component/ImageInput/ImageInput';
-import ButtonList from '../component/Buttons/ButtonActions';
-import { useRequest } from '../context/RequestContext';
+import TextInput from '@/components/TextInput';
+import { useTheme } from '@/hooks/ThemeContext';
+import ImageInput from '@/components/ImageInput/ImageInput';
+import ButtonList from '@/components/Buttons/ButtonActions';
+import { useRequest } from '@/hooks/RequestContext';
+import { useNavigation } from 'expo-router';
 
 
-const CreatePost = ({ navigation }) => {
+const CreatePost = () => {
     const [input, setInput] = React.useState({ images: [] });
     const [errors, setErrors] = React.useState({ images: [] });
     const [processing, setProcessing] = React.useState(false);
     const [theme] = useTheme();
     const request = useRequest();
+    const navigation = useNavigation()
 
     const handleChange = (key, value) => {
         input[key] = value;
@@ -35,7 +37,7 @@ const CreatePost = ({ navigation }) => {
                 <TextInput onChangeText={(input) => handleChange("description", input)} placeholder="Description..." multiline />
                 <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={{ color: theme.colors.text }}>Private</Text>
-                    <Switch value={input?.is_private} onChange={() => handleChange('is_private', !input?.is_private)} />
+                    <Switch value={Boolean(input?.private)} onChange={() => handleChange('private', !input?.private)} />
                 </View>
                 <ImageInput onChange={handleImageChange} list={input.images} theme={theme} />
                 <ButtonList style={{ borderRadius: 10, width: '100%', height: 30, borderColor: 'blue', borderWidth: 0.5 }}
@@ -89,7 +91,7 @@ const create = async (request, { title = "", description = "", is_private = fals
     const form = new FormData();
     title && form.append("title", title);
     description && form.append("description", description);
-    form.append("is_private", is_private);
+    form.append("private", is_private);
 
     images.forEach((element, i) => {
         const [type] = element.uri.split('.').reverse();
@@ -99,16 +101,17 @@ const create = async (request, { title = "", description = "", is_private = fals
             type: "image/" + type,
             name: ("img" + i + '.' + type),
         };
-        form.append("image", file);
+
+        form.append("images", file);
     });
 
     const res = await request("api/posts/", "POST", form);
 
-    if (res){
+    if (res) {
         if (res.ok) {
             navigation.goBack();
             return;
-    
+
         } else if (res.status === 400) {
             const js = await res.json();
             setErrors({ ...js });

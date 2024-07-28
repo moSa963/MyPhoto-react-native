@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import SearchBar from "../component/SearchBar";
-import UserList from "../component/UsersList/UserList";
-import { useTheme } from "../context/ThemeContext";
+import SearchBar from "@/components/SearchBar";
+import UserList from "@/components/UsersList/UserList";
+import { useTheme } from "@/hooks/ThemeContext";
 
 
 const Search = ({ navigation }) => {
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 
 const getUsers = async (request, setList, setNext, key) => {
 
-    const res = await request("api/users/list/" + key);
+    const res = await request(`api/users/list?key=${key}`);
 
     if (res.ok) {
         const js = await res.json();

@@ -1,18 +1,22 @@
 import React from "react";
 import { View } from "react-native";
-import AcceptButton from "../component/AcceptButton";
-import SearchBar from "../component/SearchBar";
-import User from "../component/UsersList/User";
-import UserList from "../component/UsersList/UserList";
+import AcceptButton from "@/components/AcceptButton";
+import SearchBar from "@/components/SearchBar";
+import User from "@/components/UsersList/User";
+import UserList from "@/components/UsersList/UserList";
+import { useLocalSearchParams, useNavigation } from "expo-router";
 
-const ShowUserList = ({ route, navigation }) => {
+const ShowUserList = () => {
     const [searchKey, setSearchKey] = React.useState(null);
+    const params = useLocalSearchParams();
+    const navigation = useNavigation();
 
+    
     React.useLayoutEffect(() => {
         navigation.setOptions({
-            title: route.params.type,
+            title: params.type,
         });
-    }, [navigation, route]);
+    }, [navigation, params]);
 
 
     return (
@@ -20,8 +24,8 @@ const ShowUserList = ({ route, navigation }) => {
             <SearchBar onTextChange={setSearchKey} />
             {
                 <UserList navigation={navigation}
-                    loader={(request, setList, setNext) => getUsers(request, setList, setNext, searchKey, route.params.user.username, route.params.type)}
-                    map={(e, showUser) => map(e, showUser, route.params.type)}
+                    loader={(request, setList, setNext) => getUsers(request, setList, setNext, searchKey, params.username, params.type)}
+                    map={(e, showUser) => map(e, showUser, params.type)}
                     loaderNext={getNext} />
             }
         </View>

@@ -1,20 +1,21 @@
 import React, { Fragment } from 'react';
 import { StyleSheet, ScrollView, TouchableOpacity, View, Text, Switch, ActivityIndicator, RefreshControl } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import PostCard from "../component/PostCard/PostCard";
-import { useTheme } from '../context/ThemeContext';
+import PostCard from "@/components/PostCard/PostCard";
+import { useTheme } from '@/hooks/ThemeContext';
 import Icon from "react-native-vector-icons/AntDesign";
-import BottomCard from '../component/BottomCard';
-import Button from '../component/Buttons/Button';
-import { useAuth } from '../context/AuthContext';
-import WaitingCard from '../component/WaitingCard';
-import CommentInput from '../component/CommentInput';
-import Comment from '../component/Comment';
-import { useRequest } from '../context/RequestContext';
+import BottomCard from '@/components/BottomCard';
+import Button from '@/components/Buttons/Button';
+import { useAuth } from '@/hooks/AuthContext';
+import WaitingCard from '@/components/WaitingCard';
+import CommentInput from '@/components/CommentInput';
+import Comment from '@/components/Comment';
+import { useRequest } from '@/hooks/RequestContext';
+import { useGlobalSearchParams, useNavigation, useRouter } from 'expo-router';
 
 
 const Tools = ({ post, auth, onDelete, onPrivateChange, theme }) => {
-    const [isPrivate, setIsPrivate] = React.useState(post.is_private);
+    const [isPrivate, setIsPrivate] = React.useState(post.private);
 
     if (auth.user.username === post.user.username) return (
         <Fragment>
@@ -32,7 +33,7 @@ const Tools = ({ post, auth, onDelete, onPrivateChange, theme }) => {
 }
 
 
-const ShowPost = ({ navigation, route }) => {
+const ShowPost = () => {
     const [theme, setTheme] = useTheme();
     const [post, setPost] = React.useState();
     const [comments, setComments] = React.useState([]);
@@ -41,10 +42,13 @@ const ShowPost = ({ navigation, route }) => {
     const [processing, setProcessing] = React.useState(false);
     const [refreshing, setRefreshing] = React.useState(false);
     const request = useRequest();
+    const param = useGlobalSearchParams();
+    const navigation = useNavigation();
     const [auth] = useAuth();
+    const router = useRouter();
 
     React.useEffect(() => {
-        getPost(request, route.params.post.id, setPost);
+        getPost(request, param.id, setPost);
     }, []);
 
     React.useEffect(() => {
@@ -54,7 +58,7 @@ const ShowPost = ({ navigation, route }) => {
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
-            title: route.params.post.title,
+            title: post?.title,
             headerRight: () => (
                 <TouchableOpacity style={{ marginRight: 15 }}
                     onPress={() => setSettingsCard(s => !s)}
@@ -63,7 +67,7 @@ const ShowPost = ({ navigation, route }) => {
                 </TouchableOpacity>
             ),
         });
-    }, [navigation, theme, route.params]);
+    }, [navigation, theme, post]);
 
     const handleUpdate = async (isPrivate, setIsPrivate) => {
         await update(request, post.id, isPrivate, setIsPrivate);
@@ -86,11 +90,11 @@ const ShowPost = ({ navigation, route }) => {
         if (!navigation) return;
 
         if (user?.username === auth.user?.username) {
-            navigation.navigate('Profile', { screen: 'Profile', });
+            router.replace("/profile");
             return;
         }
 
-        navigation.navigate('ShowUser', { username: user?.username });
+        router.replace(`/users/${user?.username}`);
     }
 
     const handleDelete = (c) => {
@@ -110,7 +114,7 @@ const ShowPost = ({ navigation, route }) => {
                 onScroll={handleScroll}>
 
                 <GestureHandlerRootView >
-                    <PostCard post={route.params.post} />
+                    <PostCard post={post} />
                 </GestureHandlerRootView>
 
                 <CommentInput post={post} flex={1} />
@@ -133,7 +137,7 @@ const styles = StyleSheet.create({
 
 
 const getPost = async (request, id, setPost) => {
-    const res = await request(`api/posts/${id}/`);
+    const res = await request(`api/posts/${id}`);
 
     if (res.ok) {
         const js = await res.json();
@@ -151,16 +155,16 @@ const deletePost = async (request, id, nav) => {
 
 const update = async (request, id, isPrivate, setIsPrivate) => {
     const form = new FormData();
-    form.append("is_private", isPrivate);
+    form.append("private", isPrivate);
 
     const res = await request(`api/posts/${id}/`, "PUT", form);
 
     if (res.ok) setIsPrivate(isPrivate);
 }
 
-const loadComments = async (request, id, post_id, setComments, setNext) => {
+const loadComments = async (request, id, setComments, setNext) => {
 
-    const res = await request(`api/posts/${id}/comments/`);
+    const res = await request(`api/posts/${id}/comments/list`);
 
     if (res.ok) {
         const js = await res.json();
