@@ -1,17 +1,20 @@
 import React from 'react';
 import { StyleSheet, View, Text, Animated } from 'react-native';
-import { useAuth } from '../hooks/AuthContext';
-import { BASE_URL } from '../http/HttpRequest';
-import { numberToStr } from '../utils/numberToStr';
-import Button from './Buttons/Button';
-import FollowButton from './FollowButton';
-import Image from './ImageList/Image';
+import { useAuth } from '@/hooks/AuthContext';
+import { BASE_URL } from '@/http/HttpRequest';
+import { numberToStr } from '@/utils/numberToStr';
+import Button from '@/components/Buttons/Button';
+import FollowButton from '@/components/FollowButton';
+import Image from '@/components/ImageList/Image';
+import { useRouter } from 'expo-router';
 
-const UserBanner = ({ theme, anim, navigation, user, profile }) => {
+const UserBanner = ({ theme, anim, user, profile }) => {
     const [auth] = useAuth();
+    const router = useRouter();
+
 
     const handleShowUsers = (type) => {
-        navigation.push("UsersList", { type: type, user: user });
+        router.push(`/users?username=${user.username}&type=${type}`);
     }
 
     return (

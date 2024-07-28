@@ -1,10 +1,11 @@
 import React from "react";
 import { ActivityIndicator, FlatList } from "react-native";
 import FollowButton from "../FollowButton";
-import User from "./User";
-import { useAuth } from "../../context/AuthContext";
-import { useRequest } from "../../context/RequestContext";
-import { useTheme } from "../../context/ThemeContext";
+import User from "@/components/UsersList/User";
+import { useAuth } from "@/hooks/AuthContext";
+import { useRequest } from "@/hooks/RequestContext";
+import { useTheme } from "@/hooks/ThemeContext";
+import { useRouter } from "expo-router";
 
 
 const defaultMap = (user, showUser) => {
@@ -14,13 +15,14 @@ const defaultMap = (user, showUser) => {
 }
 
 
-const UserList = ({ ListHeaderComponent, loader, loaderNext, navigation, map = defaultMap }) => {
+const UserList = ({ ListHeaderComponent, loader, loaderNext, map = defaultMap }) => {
     const [list, setList] = React.useState([]);
     const [next, setNext] = React.useState(null);
     const [processing, setProcessing] = React.useState(false);
     const [theme] = useTheme();
     const [auth] = useAuth();
     const request = useRequest();
+    const router = useRouter();
 
 
     React.useEffect(() => {
@@ -36,14 +38,12 @@ const UserList = ({ ListHeaderComponent, loader, loaderNext, navigation, map = d
     }
 
     const showUser = (user) => {
-        if (!navigation) return;
-
         if (user?.username === auth.user?.username) {
-            navigation.navigate('Profile', { screen: 'Profile', });
+            router.replace('/profile');
             return;
         }
 
-        navigation.navigate('ShowUser', { username: user?.username });
+        router.replace(`/users/${user?.username}`);
     }
 
     return (

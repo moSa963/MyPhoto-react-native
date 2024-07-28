@@ -1,6 +1,6 @@
 import React from 'react';
 import { Animated, View } from 'react-native';
-import SvgSwip from './SvgSwipe';
+import SvgSwip from '@/components/ImageList/SvgSwipe';
 import { PanGestureHandler, PinchGestureHandler, State } from "react-native-gesture-handler";
 
 const ImageSwip = ({ source, index, onIndexChange, onStateChange, action, maxIndex, backgroundColor, header }) => {

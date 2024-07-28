@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, RefreshControl, ActivityIndicator, FlatList } from 'react-native';
-import PostCard from './PostCard';
-import { useTheme } from '../../context/ThemeContext';
+import PostCard from '@/components/PostCard/PostCard';
+import { useTheme } from '@/hooks/ThemeContext';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { useRequest } from '../../context/RequestContext';
+import { useRequest } from '@/hooks/RequestContext';
 
 
-const PostCardList = ({ navigation, onScroll, ListHeaderComponent, onShowPost, onReferesh }) => {
+const PostCardList = ({ onScroll, ListHeaderComponent, onShowPost, onReferesh }) => {
     const [processing, setProcessing] = React.useState(false);
     const [list, setList] = React.useState([])
     const [next, setNext] = React.useState(false);
@@ -16,7 +16,7 @@ const PostCardList = ({ navigation, onScroll, ListHeaderComponent, onShowPost, o
 
     React.useEffect(() => {
         getPosts(request, setList, setNext, setRefreshing);
-    }, [navigation, request]);
+    }, [request]);
 
     const handleRefresh = () => {
         getPosts(request, setList, setNext, setRefreshing);
@@ -42,7 +42,7 @@ const PostCardList = ({ navigation, onScroll, ListHeaderComponent, onShowPost, o
                 showsVerticalScrollIndicator={false}
                 data={list}
                 keyExtractor={(e, i) => 'key ' + e.id}
-                renderItem={({ item }) => <PostCard nav={navigation} post={item} onShowPost={onShowPost} />}
+                renderItem={({ item }) => <PostCard post={item} onShowPost={onShowPost} />}
             />
         </GestureHandlerRootView>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput as Input, Animated, TextInputProps } from 'react-native';
-import { Light, useTheme } from '../context/ThemeContext';
+import { Light, useTheme } from '@/hooks/ThemeContext';
 
 const AnimatedTextInput = Animated.createAnimatedComponent(Input);
 

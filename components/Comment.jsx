@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { useTheme } from "../context/ThemeContext";
-import Like from "./Like";
-import User from "./UsersList/User";
-import {praseTime} from "../utils/praseTime";
+import { useTheme } from "@/hooks/ThemeContext";
+import Like from "@/components/Like";
+import User from "@/components/UsersList/User";
+import {parseTime} from "@/utils/parseTime";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "@/hooks/AuthContext";
 
 const Comment = ({ comment, onPress, onDelete }) => {
     const [theme] = useTheme();
@@ -28,7 +28,7 @@ const Comment = ({ comment, onPress, onDelete }) => {
                 <Like item={comment} type="comment" color={theme.colors.text} size={20}/>
 
                 <View style={{ flexGrow: 1 }} />
-                <Text style={{ color: theme.colors.text, marginRight: 0 }}>{praseTime(comment.date)}</Text>
+                <Text style={{ color: theme.colors.text, marginRight: 0 }}>{parseTime(comment.created_at)}</Text>
             </View>
         </View>
 

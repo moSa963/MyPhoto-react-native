@@ -1,14 +1,14 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { useTheme } from "../../hooks/ThemeContext";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 
 const Button = ({children, style, ...rest}) => {
-    const [theme] = useTheme();
+    const color = useThemeColor();
 
     return (
         <TouchableOpacity style={{  ...style}} activeOpacity={.5} {...rest}>
-            <View style={{ ...styles.root, borderColor: theme.alpha(theme.colors.text, 0.5) }}>
+            <View style={{ ...styles.root, borderColor: color.tint }}>
                 {children}
             </View>
         </TouchableOpacity>

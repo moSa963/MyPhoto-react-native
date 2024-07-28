@@ -1,14 +1,14 @@
 import React from "react";
 import { View, StyleSheet, Animated, Text } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
-import { useRequest } from "../context/RequestContext";
-import { numberToStr } from "../utils/numberToStr";
+import { useRequest } from "@/hooks/RequestContext";
+import { numberToStr } from "@/utils/numberToStr";
+import { Ionicons } from "@expo/vector-icons";
 
-const AnimatedIcon = Animated.createAnimatedComponent(Icon);
+const AnimatedView = Animated.createAnimatedComponent(View);
 
 const Like = ({ size, color, item, type = "post" }) => {
     const [liked, setLiked] = React.useState(false);
-    const [toValue, setToValue] = React.useState(item.user_liked ? 0 : 1);
+    const [toValue, setToValue] = React.useState(item.liked ? 0 : 1);
     const anim = React.useRef(new Animated.Value(0)).current;
     const request = useRequest();
 
@@ -33,9 +33,10 @@ const Like = ({ size, color, item, type = "post" }) => {
 
     return (
         <View style={styles.root} onTouchEnd={() => handlePress()}>
-            <AnimatedIcon name={liked ? "ios-heart" : "ios-heart-outline"} color={color} size={size}
-                style={{ transform: [{ scale: anim }] }} />
-            <Text style={{ color: color }}>{numberToStr(item.likes + (liked ? 1 : 0))}</Text>
+            <AnimatedView style={{ transform: [{ scale: anim }] }}>
+                <Ionicons name={liked ? "heart" : "heart-outline"} color={color} size={size} />
+            </AnimatedView>
+            <Text style={{ color: color }}>{numberToStr(item.likes_count + (liked ? 1 : 0))}</Text>
         </View>
     );
 }
@@ -50,9 +51,9 @@ const styles = StyleSheet.create({
 const likeRequest = async (request, type, id, like, setLike) => {
     url = ""
 
-    if (type == "post"){
+    if (type == "post") {
         url = `api/posts/${id}/likes/`
-    }else {
+    } else {
         url = `api/comments/${id}/likes/`
     }
 

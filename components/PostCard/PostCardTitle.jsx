@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { BASE_URL } from "../../http/HttpRequest";
-import { praseTime } from "../../utils/praseTime";
-import Image from "../ImageList/Image";
-import { useTheme } from "../../context/ThemeContext";
+import { BASE_URL } from "@/http/HttpRequest";
+import { parseTime } from "@/utils/parseTime";
+import Image from "@/components/ImageList/Image";
+import { useTheme } from "@/hooks/ThemeContext";
 
 
 const Title = ({ title, post, onShowPost, onShowUser }) => {
@@ -25,7 +25,7 @@ const Title = ({ title, post, onShowPost, onShowUser }) => {
 
                 <Text numberOfLines={1}
                     style={{ color: theme.colors.text, fontSize: 10, position: 'absolute', bottom: 15, right: 15 }}>
-                    {"@" + post.user.username + " . " + praseTime(post.date)}
+                    {"@" + post.user.username + " . " + parseTime(post.created_at)}
                 </Text>
             </View>
         </View>

@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
-import { useRequest } from "../hooks/RequestContext";
-import { useTheme } from "../hooks/ThemeContext";
-import ButtonActions from "./Buttons/ButtonActions";
+import { useRequest } from "@/hooks/RequestContext";
+import { useTheme } from "@/hooks/ThemeContext";
+import ButtonActions from "@/components/Buttons/ButtonActions";
 
 
 const FollowButton = ({ user }) => {
@@ -11,7 +11,7 @@ const FollowButton = ({ user }) => {
     const request = useRequest();
 
     React.useEffect(() => {
-        switch (user.is_following) {
+        switch (user.following_status) {
             case null: setIndex(1); break;
             case false: setIndex(2); break;
             case true: setIndex(3); break;
@@ -58,5 +58,6 @@ const followRequest = async (request, setIndex, username, unfollow = false) => {
         }
     }
 }
+
 
 export default FollowButton;

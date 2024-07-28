@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { BASE_URL } from '../../http/HttpRequest';
-import Image from '../ImageList/Image';
+import { BASE_URL } from '@/http/HttpRequest';
+import Image from '@/components/ImageList/Image';
 
 const PostListItem = ({ post, onShowPost, theme }) => {
     

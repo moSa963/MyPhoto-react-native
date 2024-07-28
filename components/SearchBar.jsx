@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
-import { useTheme } from "../context/ThemeContext";
-import TextInput from "./TextInput";
+import { useTheme } from "@/hooks/ThemeContext";
+import TextInput from "@/components/TextInput";
 
 
 const SearchBar = ({ onTextChange, ...rest })=>{

@@ -1,8 +1,8 @@
 import React from "react";
 import { View } from "react-native";
-import ImageSwip from "./ImageSwipe";
-import { getHeader } from "../../http/HttpRequest";
-import Image from "./Image";
+import ImageSwip from "@/components/ImageList/ImageSwipe";
+import { getHeader } from "@/http/HttpRequest";
+import Image from "@/components/ImageList/Image";
 
 
 const ImageList = ({ list, onChange, backgroundColor }) => {

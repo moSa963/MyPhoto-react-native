@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Animated } from "react-native";
-import ButtonActions from "../Buttons/ButtonActions";
+import ButtonActions from "@/components/Buttons/ButtonActions";
 
 
 const RegisterNavButton = ({ setIndex, index }) => {

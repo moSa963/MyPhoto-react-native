@@ -1,14 +1,13 @@
 import React from 'react';
-import { StyleSheet, RefreshControl } from 'react-native';
-import { useTheme } from '../../context/ThemeContext';
-import { FlatList } from 'react-native-gesture-handler';
-import ToolsBar from '../PostsToolsBar';
-import { useRequest } from '../../context/RequestContext';
-import PostListItem from './PostListItem';
+import { StyleSheet, RefreshControl, FlatList } from 'react-native';
+import { useTheme } from '@/hooks/ThemeContext';
+import ToolsBar from '@/components/PostsToolsBar';
+import { useRequest } from '@/hooks/RequestContext';
+import PostListItem from '@/components/PostsGallery/PostListItem';
 
 
 
-const PostList = ({ navigation, onScroll, ListHeaderComponent, onShowPost, user, onReferesh }) => {
+const PostList = ({ onScroll, ListHeaderComponent, onShowPost, user, onReferesh }) => {
     const [processing, setProcessing] = React.useState(false);
     const [theme] = useTheme();
     const [list, setList] = React.useState([])

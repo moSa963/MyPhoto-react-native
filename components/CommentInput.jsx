@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { useRequest } from "../context/RequestContext";
-import { useTheme } from "../context/ThemeContext";
-import Button from "./Buttons/Button";
-import TextInput from "./TextInput";
+import { useRequest } from "@/hooks/RequestContext";
+import { useTheme } from "@/hooks/ThemeContext";
+import Button from "@/components/Buttons/Button";
+import TextInput from "@/components/TextInput";
 
 
 const CommentInput = ({ post }) => {

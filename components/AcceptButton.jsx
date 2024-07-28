@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, ActivityIndicator } from "react-native";
-import { useRequest } from "../context/RequestContext";
-import { useTheme } from "../context/ThemeContext";
-import ButtonActions from "./Buttons/ButtonActions";
+import { useRequest } from "@/hooks/RequestContext";
+import { useTheme } from "@/hooks/ThemeContext";
+import ButtonActions from "@/components/Buttons/ButtonActions";
 
 
 const AcceptButton = ({ follow }) => {
@@ -36,7 +36,7 @@ const AcceptButton = ({ follow }) => {
 }
 
 const acceptRequest = async (request, username, setIndex) => {
-    const res = await request("api/follow/accept/" + username, "PUT");
+    const res = await request("api/follow/accept/" + username, "POST");
 
     if (res.ok) return setIndex(2);
 
