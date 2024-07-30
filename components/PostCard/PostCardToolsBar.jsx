@@ -8,7 +8,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 
 const PostCardToolsBar = ({ post, index, }) => {
-    const [theme] = useTheme();
+    const { theme } = useTheme();
 
     return (
         <View style={styles.root}>

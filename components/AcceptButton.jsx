@@ -7,7 +7,7 @@ import ButtonActions from "@/components/Buttons/ButtonActions";
 
 const AcceptButton = ({ follow }) => {
     const [index, setIndex] = React.useState(1);
-    const [theme] = useTheme();
+    const { theme } = useTheme();
     const request = useRequest();
 
     const handlePress = (e) => {

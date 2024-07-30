@@ -7,9 +7,9 @@ import PostListItem from '@/components/PostsGallery/PostListItem';
 
 
 
-const PostList = ({ onScroll, ListHeaderComponent, onShowPost, user, onReferesh }) => {
+const PostList = ({ onScroll, ListHeaderComponent, onShowPost, user, onReferesh: onRefresh }) => {
     const [processing, setProcessing] = React.useState(false);
-    const [theme] = useTheme();
+    const { theme } = useTheme();
     const [list, setList] = React.useState([])
     const [next, setNext] = React.useState(false);
     const [refreshing, setRefreshing] = React.useState(false);
@@ -23,7 +23,7 @@ const PostList = ({ onScroll, ListHeaderComponent, onShowPost, user, onReferesh 
 
     const handleRefresh = () => {
         getPosts(request, setList, setNext, user?.username, type, sort);
-        onReferesh && onReferesh();
+        onRefresh && onRefresh();
     }
 
     const handleScroll = (e) => {

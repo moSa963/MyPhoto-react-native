@@ -4,11 +4,11 @@ import { useTheme } from "@/hooks/ThemeContext";
 import TextInput from "@/components/TextInput";
 
 
-const SearchBar = ({ onTextChange, ...rest })=>{
-    const [theme] = useTheme();
+const SearchBar = ({ onTextChange, ...rest }) => {
+    const { theme } = useTheme();
     const [text, setText] = React.useState("");
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         const id = setTimeout(() => {
             onTextChange(text === '' ? null : text);
         }, 400);
@@ -18,7 +18,7 @@ const SearchBar = ({ onTextChange, ...rest })=>{
 
     return (
         <View {...rest}>
-            <TextInput placeholder="Search..." theme={theme} onChangeText={setText}/>
+            <TextInput placeholder="Search..." theme={theme} onChangeText={setText} />
         </View>
     );
 }

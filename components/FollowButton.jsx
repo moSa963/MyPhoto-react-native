@@ -7,7 +7,7 @@ import ButtonActions from "@/components/Buttons/ButtonActions";
 
 const FollowButton = ({ user }) => {
     const [index, setIndex] = React.useState(0);
-    const [theme] = useTheme();
+    const { theme } = useTheme();
     const request = useRequest();
 
     React.useEffect(() => {

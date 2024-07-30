@@ -20,7 +20,7 @@ const getSortName = (index) => {
 }
 
 const ToolsBar = ({ onChange }) => {
-    const [theme] = useTheme();
+    const { theme } = useTheme();
     const [layout, setLayout] = React.useState({ width: 300, height: 0 });
     const [position, setPosition] = React.useState([0, 0]);
     const [position2, setPosition2] = React.useState(0);

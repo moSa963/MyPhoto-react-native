@@ -9,7 +9,7 @@ import Image from '@/components/ImageList/Image';
 import { useRouter } from 'expo-router';
 
 const UserBanner = ({ theme, anim, user, profile }) => {
-    const [auth] = useAuth();
+    const auth = useAuth();
     const router = useRouter();
 
 

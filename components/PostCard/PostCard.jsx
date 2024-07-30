@@ -13,14 +13,14 @@ import { useNavigation, useRouter } from "expo-router";
 const PostCard = ({ post, onShowPost }) => {
     const [collabse, setCollabse] = React.useState(1);
     const [index, setIndex] = React.useState(0);
-    const [theme] = useTheme();
-    const [auth] = useAuth();
+    const { theme } = useTheme();
+    const auth = useAuth();
     const router = useRouter();
 
 
     const handleShowUser = (user) => {
 
-        if (user?.id === auth.user.id) {
+        if (user?.username === auth.user?.username) {
             router.push(`profile`)
             return;
         }

@@ -6,7 +6,7 @@ import Image from "@/components/ImageList/Image";
 
 
 const User = ({ user, onPress, children, small }) => {
-    const [theme, setTheme] = useTheme();
+    const { theme } = useTheme();
     const size = small ? 30 : 50;
 
 

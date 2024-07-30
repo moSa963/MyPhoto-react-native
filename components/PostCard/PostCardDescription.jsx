@@ -4,13 +4,13 @@ import { useTheme } from "@/hooks//ThemeContext";
 
 
 const PostCardDescription = ({ post }) => {
-    const [collabse, setCollabse] = React.useState(1);
-    const [theme] = useTheme();
+    const [collapse, setCollapse] = React.useState(1);
+    const { theme } = useTheme();
 
     return (
-        <Text numberOfLines={collabse}
+        <Text numberOfLines={collapse}
             style={{ ...styles.root, color: theme.colors.text }}
-            onPress={() => setCollabse(collabse ? null : 1)}>
+            onPress={() => setCollapse(collapse ? null : 1)}>
             {post.description}
         </Text>
     );

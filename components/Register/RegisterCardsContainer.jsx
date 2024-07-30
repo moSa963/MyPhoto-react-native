@@ -4,34 +4,36 @@ import LoginCard from "./LoginCard";
 import SignupCard from "./SignupCard";
 
 
-const RegisterCardsContainer = ({ auth, anim, setAuth })=>{
+const RegisterCardsContainer = ({ anim }) => {
 
     return (
         <View style={{ width: '100%', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Animated.View style={{...styles.card,
-                zIndex: anim.interpolate({inputRange: [0.4, 0.5], outputRange: [4, 5]}),
-                opacity: anim.interpolate({inputRange: [0, 0.1], outputRange: [0, 1]}),
+            <Animated.View style={{
+                ...styles.card,
+                zIndex: anim.interpolate({ inputRange: [0.4, 0.5], outputRange: [4, 5] }),
+                opacity: anim.interpolate({ inputRange: [0, 0.1], outputRange: [0, 1] }),
                 transform: [
-                    {perspective: 360},
-                    {rotateY: anim.interpolate({inputRange: [0, 0.4, 0.8, 1], outputRange: ["0deg", '30deg', '20deg', "0deg"]})},
-                    {translateX: anim.interpolate({inputRange: [0, 0.4, 0.8, 1], outputRange: [0, -200, -150, 0]})},
-                    {scale: anim.interpolate({inputRange: [0, 1], outputRange: [0.7, 1]})},
+                    { perspective: 360 },
+                    { rotateY: anim.interpolate({ inputRange: [0, 0.4, 0.8, 1], outputRange: ["0deg", '30deg', '20deg', "0deg"] }) },
+                    { translateX: anim.interpolate({ inputRange: [0, 0.4, 0.8, 1], outputRange: [0, -200, -150, 0] }) },
+                    { scale: anim.interpolate({ inputRange: [0, 1], outputRange: [0.7, 1] }) },
                 ]
             }}>
-                <LoginCard auth={auth} setAuth={setAuth}/>
+                <LoginCard />
             </Animated.View>
-            
-            <Animated.View style={{...styles.card, 
-                zIndex: anim.interpolate({inputRange: [0.4, 0.5], outputRange: [5, 4]}),
-                opacity: anim.interpolate({inputRange: [0.9, 1], outputRange: [1, 0]}),
+
+            <Animated.View style={{
+                ...styles.card,
+                zIndex: anim.interpolate({ inputRange: [0.4, 0.5], outputRange: [5, 4] }),
+                opacity: anim.interpolate({ inputRange: [0.9, 1], outputRange: [1, 0] }),
                 transform: [
-                    {perspective: 1000},
-                    {rotateY: anim.interpolate({inputRange: [0, 0.4, 0.8, 1], outputRange: ["0deg", '-20deg', '-30deg', "0deg"]})},
-                    {translateX: anim.interpolate({inputRange: [0, 0.4, 0.8, 1], outputRange: [0, 150, 200, 0]})},
-                    {scale: anim.interpolate({inputRange: [0, 1], outputRange: [1, 0.7]})},
+                    { perspective: 1000 },
+                    { rotateY: anim.interpolate({ inputRange: [0, 0.4, 0.8, 1], outputRange: ["0deg", '-20deg', '-30deg', "0deg"] }) },
+                    { translateX: anim.interpolate({ inputRange: [0, 0.4, 0.8, 1], outputRange: [0, 150, 200, 0] }) },
+                    { scale: anim.interpolate({ inputRange: [0, 1], outputRange: [1, 0.7] }) },
                 ]
             }}>
-                <SignupCard auth={auth} setAuth={setAuth} />
+                <SignupCard />
             </Animated.View>
         </View>
     );
@@ -39,7 +41,7 @@ const RegisterCardsContainer = ({ auth, anim, setAuth })=>{
 
 
 const styles = StyleSheet.create({
-    card:{
+    card: {
         position: 'absolute',
         borderColor: 'blue',
         borderRadius: 25,

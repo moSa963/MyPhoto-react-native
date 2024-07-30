@@ -8,7 +8,7 @@ import TextInput from "@/components/TextInput";
 
 const CommentInput = ({ post }) => {
     const [content, setContent] = React.useState("");
-    const [theme] = useTheme();
+    const { theme } = useTheme();
     const request = useRequest();
 
     const handleSend = () => {

@@ -1,5 +1,5 @@
 import * as SecureStore from "expo-secure-store";
-export const BASE_URL = "http://192.168.1.103:8000/";
+export const BASE_URL = "/";
 
 const refresh = async () => {
     const refreshKey = await SecureStore.getItemAsync("refresh_key");
@@ -8,7 +8,7 @@ const refresh = async () => {
 
     const response = await fetch(BASE_URL + "api/users/token/refresh", {
         method: "POST",
-        headers:{
+        headers: {
             'Accept': "application/json",
         },
         body: JSON.stringify({
@@ -16,11 +16,11 @@ const refresh = async () => {
         }),
     });
 
-    if (response.ok){
+    if (response.ok) {
         const data = await response.json();
         await SecureStore.setItemAsync("access_key", data.access);
         return response;
-    } else if (response.status === 401){
+    } else if (response.status === 401) {
         SecureStore.deleteItemAsync("refresh_key");
     }
 
@@ -28,49 +28,50 @@ const refresh = async () => {
 }
 
 
-export const getHeader = async ()=>{
+export const getHeader = async () => {
     const header = {
         'Accept': "application/json",
         'Connection': 'keep-alive',
         'Content-Type': 'multipart/form-data',
     };
 
-    try{
+    try {
         const access_key = await SecureStore.getItemAsync("access_key");
-        if (access_key){
+
+        if (access_key) {
             header['Authorization'] = "Bearer " + access_key;
         }
-    } catch(e){
+    } catch (e) {
         console.log(e);
     }
 
-    
+
     return header;
 }
 
 
-const request = async (url = BASE_URL, method = "GET", data = null)=>{
+const request = async (url = BASE_URL, method = "GET", data = null) => {
     var body = {};
 
-    if (data){
+    if (data) {
         body["body"] = data;
     }
 
     body["headers"] = await getHeader();
 
     body["method"] = method;
-    
-    if (!url.match(/^https?:/s)){
+
+    if (!url.match(/^https?:/s)) {
         url = BASE_URL + url;
     }
 
     var response = await fetch(url, body);
 
-    if (response.status === 401){
+    if (response.status === 401) {
         await SecureStore.deleteItemAsync("access_key");
         const refreshRes = await refresh();
 
-        if (refreshRes?.ok){
+        if (refreshRes?.ok) {
             body["headers"] = await getHeader();
             response = await fetch(url, body);
         }

@@ -6,12 +6,12 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useRequest } from '@/hooks/RequestContext';
 
 
-const PostCardList = ({ onScroll, ListHeaderComponent, onShowPost, onReferesh }) => {
+const PostCardList = ({ onScroll, ListHeaderComponent, onShowPost, onReferesh: onRefresh }) => {
     const [processing, setProcessing] = React.useState(false);
     const [list, setList] = React.useState([])
     const [next, setNext] = React.useState(false);
     const [refreshing, setRefreshing] = React.useState(false);
-    const [theme] = useTheme();
+    const { theme } = useTheme();
     const request = useRequest();
 
     React.useEffect(() => {
@@ -20,7 +20,7 @@ const PostCardList = ({ onScroll, ListHeaderComponent, onShowPost, onReferesh })
 
     const handleRefresh = () => {
         getPosts(request, setList, setNext, setRefreshing);
-        onReferesh && onReferesh();
+        onRefresh && onRefresh();
     }
 
     const handleScroll = (e) => {

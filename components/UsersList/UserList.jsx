@@ -19,8 +19,8 @@ const UserList = ({ ListHeaderComponent, loader, loaderNext, map = defaultMap })
     const [list, setList] = React.useState([]);
     const [next, setNext] = React.useState(null);
     const [processing, setProcessing] = React.useState(false);
-    const [theme] = useTheme();
-    const [auth] = useAuth();
+    const { theme } = useTheme();
+    const auth = useAuth();
     const request = useRequest();
     const router = useRouter();
 

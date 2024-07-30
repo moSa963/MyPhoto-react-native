@@ -7,7 +7,7 @@ const AnimatedTextInput = Animated.createAnimatedComponent(Input);
 const TextInput = (props) => {
     const [foucus, setFoucus] = React.useState(false);
     const anim = React.useRef(new Animated.Value(0.1)).current;
-    const [theme] = useTheme();
+    const { theme } = useTheme();
 
     const { error, flex, value, ...rest } = props;
 
