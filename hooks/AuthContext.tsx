@@ -3,7 +3,7 @@ import * as SecureStore from "expo-secure-store";
 import { useRequest } from "./RequestContext";
 import Auth from "@/models/Auth";
 
-type AuthStatus = "waiting" | "authenticated" | "unverified" | "unauthenticated";
+type AuthStatus = "none" | "waiting" | "authenticated" | "unverified" | "unauthenticated";
 
 type AuthState = {
     status: AuthStatus, errors: Object | null, user: Auth | null
@@ -19,7 +19,7 @@ interface AuthContext {
 }
 
 const Context = createContext<AuthContext>({
-    status: "unauthenticated",
+    status: "none",
     errors: null,
     user: null,
     login: async (_: Auth) => { },
@@ -28,7 +28,7 @@ const Context = createContext<AuthContext>({
 });
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
-    const [auth, setAuth] = React.useState<AuthState>({ status: "unauthenticated", errors: null, user: null });
+    const [auth, setAuth] = React.useState<AuthState>({ status: "none", errors: null, user: null });
     const request = useRequest();
 
     React.useEffect(() => {
