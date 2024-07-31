@@ -1,13 +1,11 @@
-import { AuthStatus, useAuth } from "@/hooks/AuthContext";
+import { useAuth } from "@/hooks/AuthContext";
 import { Redirect, Slot } from "expo-router";
-import { Fragment } from "react"
-
 
 
 const PostsLayout = () => {
-    const [auth] = useAuth();
+    const auth = useAuth();
 
-    if (auth.status !== AuthStatus.AUTHENTICATED) {
+    if (auth.status !== "authenticated") {
         return <Redirect href="auth" />
     }
 
