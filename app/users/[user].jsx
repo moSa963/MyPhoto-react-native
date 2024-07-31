@@ -10,11 +10,11 @@ import { useRequest } from "@/hooks/RequestContext";
 import { useGlobalSearchParams, useNavigation, useRouter } from "expo-router";
 
 const ShowUser = () => {
-    const [theme] = useTheme();
+    const { theme } = useTheme();
     const [settingsCard, setSettingsCard] = React.useState(false);
     const anim = React.useRef(new Animated.Value(0)).current;
     const [user, setUser] = React.useState();
-    const [auth] = useAuth();
+    const auth = useAuth();
     const request = useRequest();
     const navigation = useNavigation()
     const param = useGlobalSearchParams()
@@ -52,8 +52,8 @@ const ShowUser = () => {
             <PostList onShowPost={handleShowPost} user={user}
                 ListHeaderComponent={<UserBanner auth={auth} user={user} theme={theme} anim={anim} navigation={navigation} />}
                 onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: anim } } }], { useNativeDriver: false })}
-            /> 
-            
+            />
+
         </View>
     );
 }

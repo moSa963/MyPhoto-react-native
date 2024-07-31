@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Animated, Text, Switch, TouchableOpacity } from "react-native";
 import BottomCard from "@/components/BottomCard";
-import { Types, useAuth } from "@/hooks/AuthContext";
-import { Themes, useTheme } from "@/hooks/ThemeContext";
+import { useAuth } from "@/hooks/AuthContext";
+import { useTheme } from "@/hooks/ThemeContext";
 import Button from "@/components/Buttons/Button";
 import PostList from "@/components/PostsGallery/PostList";
 import UserBanner from "@/components/UserBanner";
@@ -13,11 +13,11 @@ import { useNavigation, useRouter } from "expo-router"
 import { Ionicons } from "@expo/vector-icons";
 
 const Profile = () => {
-    const [theme, setTheme] = useTheme();
+    const { theme, setThemeType } = useTheme();
     const [settingsCard, setSettingsCard] = React.useState(false);
     const anim = React.useRef(new Animated.Value(0)).current;
     const [user, setUser] = React.useState();
-    const [auth, setAuth] = useAuth();
+    const auth = useAuth();
     const [isPrivate, setIsPrivate] = React.useState(false);
     const request = useRequest();
     const navigation = useNavigation()
@@ -54,7 +54,7 @@ const Profile = () => {
             <BottomCard onClose={() => setSettingsCard(false)} theme={theme} open={settingsCard} >
                 <View style={styles.cardItem}>
                     <Text style={{ color: theme.colors.text, marginRight: 15 }}>DarkTheme</Text>
-                    <Switch value={theme.type === Themes.dark ? true : false} onChange={() => setTheme(theme.type === Themes.dark ? Themes.light : Themes.dark)} />
+                    <Switch value={theme.type === "dark" ? true : false} onChange={() => setThemeType(theme.type === "dark" ? "light" : "dark")} />
                 </View>
 
                 <View style={styles.cardItem}>
@@ -66,7 +66,7 @@ const Profile = () => {
                     <Text style={{ color: theme.colors.text }}>PROFILE IMAGE</Text>
                 </Button>
 
-                <Button onPress={() => setAuth(Types.LOGOUT)} >
+                <Button onPress={auth.logout} >
                     <Text style={{ color: theme.colors.text }}>LOGOUT</Text>
                 </Button>
             </BottomCard>

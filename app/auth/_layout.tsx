@@ -1,13 +1,12 @@
-import { AuthStatus, useAuth } from "@/hooks/AuthContext";
+import { useAuth } from "@/hooks/AuthContext";
 import { Redirect, Slot } from "expo-router";
-import { Fragment } from "react"
 
 
 
 const AuthLayout = () => {
-    const [auth, setAuth] = useAuth();
+    const auth = useAuth();
 
-    if (auth.status === AuthStatus.AUTHENTICATED) {
+    if (auth.status === "authenticated") {
         return <Redirect href="(tabs)" />
     }
 

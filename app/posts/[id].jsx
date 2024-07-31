@@ -34,7 +34,7 @@ const Tools = ({ post, auth, onDelete, onPrivateChange, theme }) => {
 
 
 const ShowPost = () => {
-    const [theme, setTheme] = useTheme();
+    const { theme } = useTheme();
     const [post, setPost] = React.useState();
     const [comments, setComments] = React.useState([]);
     const [nextComments, setNextComments] = React.useState(null);
@@ -44,7 +44,7 @@ const ShowPost = () => {
     const request = useRequest();
     const param = useGlobalSearchParams();
     const navigation = useNavigation();
-    const [auth] = useAuth();
+    const auth = useAuth();
     const router = useRouter();
 
     React.useEffect(() => {

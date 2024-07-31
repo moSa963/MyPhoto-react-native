@@ -7,7 +7,7 @@ import { useTheme } from "@/hooks/ThemeContext";
 
 const Search = ({ navigation }) => {
     const [searchKey, setSearchKey] = React.useState(null);
-    const [theme, setTheme] = useTheme();
+    const { theme } = useTheme();
 
     return (
         <View style={styles.root}>

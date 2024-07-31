@@ -2,14 +2,13 @@ import React from "react";
 import { StatusBar, StyleSheet, Text, View, Animated, ImageBackground } from "react-native";
 import RegisterCardsContainer from "@/components/Register/RegisterCardsContainer";
 import RegisterNavButton from "@/components/Register/RegisterNavButton";
-import { AuthStatus, useAuth } from "@/hooks/AuthContext";
-
+import { useAuth } from "@/hooks/AuthContext";
+import WaitingCard from "@/components/WaitingCard";
 
 const Register = () => {
     const anim = React.useRef(new Animated.Value(0.5)).current;
     const [index, setIndex] = React.useState(false);
-    const [auth, setAuth] = useAuth();
-
+    const auth = useAuth();
 
     React.useEffect(() => {
         Animated.spring(anim, {
@@ -20,7 +19,9 @@ const Register = () => {
         }).start();
     }, [index]);
 
-
+    if (auth.status == "none") {
+        return <WaitingCard />
+    }
 
     return (
         <View style={styles.root}>
@@ -38,7 +39,7 @@ const Register = () => {
 
             <View style={styles.cardCont} >
                 <RegisterNavButton setIndex={setIndex} index={index} />
-                <RegisterCardsContainer anim={anim} auth={auth} setAuth={setAuth} />
+                <RegisterCardsContainer anim={anim} />
             </View>
         </View>
     );

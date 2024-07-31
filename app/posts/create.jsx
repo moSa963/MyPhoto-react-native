@@ -12,7 +12,7 @@ const CreatePost = () => {
     const [input, setInput] = React.useState({ images: [] });
     const [errors, setErrors] = React.useState({ images: [] });
     const [processing, setProcessing] = React.useState(false);
-    const [theme] = useTheme();
+    const { theme } = useTheme();
     const request = useRequest();
     const navigation = useNavigation()
 
@@ -105,17 +105,10 @@ const create = async (request, { title = "", description = "", is_private = fals
         form.append("images", file);
     });
 
-    const res = await request("api/posts/", "POST", form);
+    const res = await request("api/posts/", "POST", form, "all");
 
-    if (res) {
-        if (res.ok) {
-            navigation.goBack();
-            return;
-
-        } else if (res.status === 400) {
-            const js = await res.json();
-            setErrors({ ...js });
-        }
+    if (res && res.ok) {
+        navigation.goBack();
     }
 
     setProcessing(false);
