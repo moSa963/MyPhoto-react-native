@@ -2,7 +2,7 @@ import React, { createContext, type PropsWithChildren } from "react";
 import request, { BASE_URL } from "@/http/HttpRequest";
 import { useErrorCard } from "./ErrorContext";
 
-type Request = (url: string, method: "GET" | "POST" | "PUT" | "DELETE", data: any) => Promise<Response | null> | null
+export type Request = (url: string, method?: "GET" | "POST" | "PUT" | "DELETE", data?: any) => Promise<Response | null> | null
 
 const Context = createContext<Request>(() => null);
 
@@ -21,7 +21,6 @@ const send = async (setError: any, url = BASE_URL, method = "GET", data = null, 
 
     try {
         res = await request(url, method, data);
-
         if (handle == "none" || (res && (res.ok || (res.status == 400 && handle == "auto")))) return res;
 
         if (res.status == 400) {
