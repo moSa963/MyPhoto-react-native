@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ViewProps } from 'react-native';
-import ImageList from './ImageList';
+import ImageInputList from './ImageInputList';
 import InputButtons from './InputButtons';
 import { ImagePickerAsset } from "expo-image-picker";
 import { useTheme } from '@/hooks/ThemeContext';
@@ -21,7 +21,7 @@ const ImageInput = ({ onChange, list, max = 5 }: CameraInputProps) => {
                 <InputButtons list={list} onChange={onChange} />
             }
 
-            <ImageList list={list} onChange={onChange} theme={theme} />
+            <ImageInputList list={list} onChange={onChange} />
         </View>
     );
 }
