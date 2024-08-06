@@ -13,7 +13,7 @@ const User = ({ user, onPress, children, small }) => {
     return (
         <TouchableOpacity activeOpacity={0.7} style={{ flex: 1 }} onPress={() => onPress(user)}>
             <View style={styles.titleRoot}>
-                <Image source={{ uri: BASE_URL + 'api/user/image/' + user.username }}
+                <Image href={BASE_URL + 'api/user/image/' + user.username}
                     style={{ width: size, height: size, borderWidth: 2, borderColor: theme.colors.border, borderRadius: size / 2, }} />
 
                 <View style={{ flex: 1, flexDirection: 'row', borderBottomWidth: 0.5, paddingHorizontal: 15, alignItems: 'center' }} >

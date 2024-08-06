@@ -14,7 +14,7 @@ const Avatar = ({ onPress, style, uri }: AvatarProps) => {
 
     return (
         <Pressable onPress={onPress} style={[{ width: 50, height: 50, borderWidth: 2, borderColor: theme.colors.border, borderRadius: 25, overflow: 'hidden' }, style]}>
-            <Image source={{ uri: uri }} />
+            <Image href={uri} />
         </Pressable>
 
     );

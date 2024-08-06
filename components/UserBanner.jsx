@@ -29,7 +29,7 @@ const UserBanner = ({ theme, anim, user, profile }) => {
                 ]
             }}>
             <View style={styles.head}>
-                <Image source={{ uri: `${BASE_URL}api/users/${user.username}/image` }}
+                <Image href={`${BASE_URL}api/users/${user.username}/image`}
                     style={{ ...styles.img, borderColor: theme.colors.border }}
                 />
                 <View style={styles.headContent}>
