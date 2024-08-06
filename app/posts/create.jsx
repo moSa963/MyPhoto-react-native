@@ -22,7 +22,7 @@ const CreatePost = () => {
     }
 
     const handleImageChange = (list) => {
-        setInput({ ...input, images: list });
+        setInput({ ...input, images: list.filter((_, i) => i < 5) });
     }
 
     const handlePress = () => {
@@ -39,7 +39,7 @@ const CreatePost = () => {
                     <Text style={{ color: theme.colors.text }}>Private</Text>
                     <Switch value={Boolean(input?.private)} onChange={() => handleChange('private', !input?.private)} />
                 </View>
-                <ImageInput onChange={handleImageChange} list={input.images} theme={theme} />
+                <ImageInput onChange={handleImageChange} list={input.images} />
                 <ButtonList style={{ borderRadius: 10, width: '100%', height: 30, borderColor: 'blue', borderWidth: 0.5 }}
                     onPress={() => handlePress()}
                     effectWidth={1}
