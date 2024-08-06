@@ -117,10 +117,10 @@ const startPicker = async (onUploaded) => {
 
 const imageFileForm = (image) => {
     const form = new FormData();
-    const [type] = image.uri.split('.').reverse();
+    const [type] = image[0].uri.split('.').reverse();
 
     const file = {
-        uri: image.uri,
+        uri: image[0].uri,
         type: "image/" + type,
         name: ("profile." + type),
     };
