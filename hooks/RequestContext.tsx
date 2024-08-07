@@ -2,7 +2,7 @@ import React, { createContext, type PropsWithChildren } from "react";
 import request, { BASE_URL } from "@/http/HttpRequest";
 import { useErrorCard } from "./ErrorContext";
 
-export type Request = (url: string, method?: "GET" | "POST" | "PUT" | "DELETE", data?: any) => Promise<Response | null> | null
+export type Request = (url: string, method?: "GET" | "POST" | "PUT" | "DELETE", data?: any, handle?: "all" | "none" | "auto") => Promise<Response | null> | null
 
 const Context = createContext<Request>(() => null);
 
@@ -10,7 +10,7 @@ const RequestProvider = ({ children }: PropsWithChildren) => {
     const { setError } = useErrorCard();
 
     return (
-        <Context.Provider value={(url = BASE_URL, method = "GET", data = null, handle: "all" | "none" | "auto" = "all") => send(setError, url, method, data, handle)}>
+        <Context.Provider value={(url = BASE_URL, method = "GET", data = null, handle = "all") => send(setError, url, method, data, handle)}>
             {children}
         </Context.Provider>
     );
