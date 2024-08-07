@@ -3,7 +3,7 @@ import { Animated, View } from 'react-native';
 import SvgSwip from '@/components/ImageList/SvgSwipe';
 import { PanGestureHandler, PinchGestureHandler, State } from "react-native-gesture-handler";
 
-const ImageSwip = ({ source, index, onIndexChange, onStateChange, action, maxIndex, backgroundColor, header }) => {
+const ImageSwip = ({ source, index, onIndexChange, onStateChange, action, maxIndex, backgroundColor, children }) => {
     const anim = React.useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
     const scale = React.useRef(new Animated.Value(1)).current;
     const move = React.useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
@@ -104,13 +104,14 @@ const ImageSwip = ({ source, index, onIndexChange, onStateChange, action, maxInd
                             <SvgSwip progress={anim}
                                 scale={scale}
                                 move={move}
-                                header={header}
                                 action={action}
                                 backgroundColor={backgroundColor}
                                 width={layout.width}
                                 height={layout.height}
                                 index={index}
-                                source={source} />
+                                source={source} >
+                                {children}
+                            </SvgSwip>
                         </Animated.View>
                     </View>
                 </PanGestureHandler>

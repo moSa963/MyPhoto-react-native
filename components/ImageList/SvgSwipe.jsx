@@ -2,7 +2,7 @@ import React from "react";
 import { Animated } from "react-native";
 import Svg, { Defs, ClipPath, G, Rect, Path as SvgPath } from "react-native-svg";
 import { interpolate } from "@/utils/interpolate";
-import Image from "@/components/ImageList/Image";
+;
 
 const AnimatedPath = Animated.createAnimatedComponent(SvgPath);
 
@@ -35,7 +35,7 @@ export const Path = ({ width, height, anim }) => {
 
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 
-const SvgSwip = ({ progress, source, width, height, backgroundColor, move, scale, action, index }) => {
+const SvgSwip = ({ progress, children, width, height, backgroundColor, move, scale, action }) => {
 
 
     return (
@@ -60,11 +60,7 @@ const SvgSwip = ({ progress, source, width, height, backgroundColor, move, scale
             </Defs>
             <G clipPath="url(#Mask)" clipRule="nonzero" >
                 <Rect x={0} y={0} width={width} height={height} fill={action === 0 ? "#00000000" : backgroundColor} />
-                <Image svg={true}
-                    source={{ uri: source.uri }}
-                    width="100%"
-                    height="100%"
-                    resizeMode="contain" />
+                {children}
             </G>
 
         </AnimatedSvg>
