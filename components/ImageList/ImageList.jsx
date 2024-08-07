@@ -1,20 +1,16 @@
 import React from "react";
 import { View } from "react-native";
 import ImageSwip from "@/components/ImageList/ImageSwipe";
-import { getHeader } from "@/http/HttpRequest";
 import Image from "@/components/ImageList/Image";
 
 
 const ImageList = ({ list, onChange, backgroundColor }) => {
     const [index, setIndex] = React.useState(0);
     const [action, setAction] = React.useState(0);
-    const [header, setHeader] = React.useState(null);
+    const [images, setImages] = React.useState([]);
 
     React.useEffect(() => {
-        getHeader()
-            .then(res => {
-                setHeader({ "Authorization": res["Authorization"] });
-            });
+        setImages(new Array(list.length));
     }, []);
 
     const handleIndexChanged = (i) => {
@@ -26,37 +22,41 @@ const ImageList = ({ list, onChange, backgroundColor }) => {
         setAction(action);
     }
 
+    const handleImageLoaded = (image, index) => {
+        images[index] = image;
+        setImages([...images])
+    }
+
 
     return (
-        header &&
-        <View style={{ width: '100%', aspectRatio: 1 }}>
+        Boolean(images.length) &&
+        <View style={{ position: "relative", width: '100%', aspectRatio: 1 }}>
             {
-                index - 1 >= 0 &&
-                <Image style={{ width: "100%", height: "100%", position: 'absolute', opacity: action === -1 ? 1 : 0 }}
-                    source={{ uri: list[index - 1] }}
-                    fadeDuration={0}
-                    resizeMode={"contain"}
+                action != 0 && index + action >= 0 && index + action < list.length &&
+                < Image key={index + action}
+                    style={{ position: 'absolute' }}
+                    href={list[index + action]}
+                    source={images[index + action]}
+                    onImageLoaded={(image) => handleImageLoaded(image, index + action)}
+                    contentFit="contain"
                 />
             }
 
-            {
-                index - 1 < list.length &&
-                <Image style={{ width: "100%", height: "100%", position: 'absolute', opacity: action === 1 ? 1 : 0 }}
-                    source={{ uri: list[index + 1] }}
-                    fadeDuration={0}
-                    resizeMode={"contain"}
-                />
-            }
-
-            <ImageSwip source={{ uri: list[index] }}
+            <ImageSwip key={index}
                 backgroundColor={backgroundColor}
                 maxIndex={list.length - 1}
                 action={action}
-                header={header}
                 onStateChange={handleSwipStateChange}
                 index={index}
                 onIndexChange={handleIndexChanged}
-            />
+            >
+                <Image
+                    source={images[index]}
+                    onImageLoaded={(image) => handleImageLoaded(image, index)}
+                    svg={true}
+                    href={list[index]}
+                    contentFit="contain" />
+            </ImageSwip>
         </View>
     );
 }
