@@ -1,8 +1,15 @@
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Animated, StyleSheet, View } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+import { Animated, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 
-const ImageListCounter = ({ style = {}, count, index, color }) => {
+interface ImageListCounterProps {
+    style?: StyleProp<ViewStyle>,
+    count: number,
+    index: number,
+    color?: string,
+}
+
+const ImageListCounter = ({ style = {}, count, index, color }: ImageListCounterProps) => {
     const anim = React.useRef(new Animated.Value(0)).current;
 
     React.useEffect(() => {
@@ -16,11 +23,11 @@ const ImageListCounter = ({ style = {}, count, index, color }) => {
     }, [anim, index]);
 
     return (
-        <View style={{ ...styles.root, ...style }}>
+        <View style={[styles.root, style]}>
             <Animated.View style={{ aspectRatio: 1, height: 20, flexDirection: 'row', alignItems: 'center', left: anim }}>
                 {
-                    Array.from({ length: count }).map((_,i) => (
-                        <Icon key={i}
+                    Array.from({ length: count }).map((_, i) => (
+                        <Ionicons key={i}
                             name={i === index ? "radio-button-on" : "radio-button-off"}
                             size={10}
                             style={{ aspectRatio: 1, height: 10 }}
