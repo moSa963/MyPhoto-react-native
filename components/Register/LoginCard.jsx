@@ -1,9 +1,9 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View, ActivityIndicator } from "react-native";
-import ButtonList from "@/components/Buttons/ButtonActions";
+import { ScrollView, StyleSheet, Text } from "react-native";
 import TextInput from "@/components/TextInput";
 import { useAuth } from "@/hooks/AuthContext";
 import { Validator } from "@/utils/Validator";
+import LoadingButton from "../Buttons/LoadingButton";
 
 const validator = new Validator({
     username: { min: 3, max: 50, match: /^[A-Za-z]+([._-]?[A-Za-z0-9]+)*$/s },
@@ -49,17 +49,9 @@ const LoginCard = () => {
                 textContentType="password"
                 onChangeText={(text) => handleChange('password', text)} />
 
-            <ButtonList style={{ borderRadius: 10, width: '100%', height: 30, borderColor: 'blue', borderWidth: 0.5 }}
-                onPress={handlePress}
-                effectWidth={1}
-                index={auth.status !== "waiting" === false ? 0 : 1}>
-                <View style={styles.button} >
-                    <ActivityIndicator color="blue" size="small" />
-                </View>
-                <View style={styles.button}>
-                    <Text>Login</Text>
-                </View>
-            </ButtonList>
+            <LoadingButton processing={auth.status == "waiting" ? true : false} onPress={handlePress}>
+                <Text>Login</Text>
+            </LoadingButton>
         </ScrollView>
     );
 }
