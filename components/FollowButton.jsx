@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 import { useRequest } from "@/hooks/RequestContext";
 import { useTheme } from "@/hooks/ThemeContext";
-import ButtonActions from "@/components/Buttons/ButtonActions";
+import ActionsButton from "@/components/Buttons/ActionsButton";
 
 
 const FollowButton = ({ user }) => {
@@ -26,7 +26,7 @@ const FollowButton = ({ user }) => {
     }
 
     return (
-        <ButtonActions style={{ borderRadius: 10, height: 40 }}
+        <ActionsButton style={{ borderRadius: 10, height: 40 }}
             onPress={handlePress}
             effectWidth={1}
             index={index}>
@@ -42,7 +42,7 @@ const FollowButton = ({ user }) => {
             <View style={{ backgroundColor: '#55ff5555', width: '100%', height: 40, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ color: theme.colors.text }}>Following</Text>
             </View>
-        </ButtonActions>
+        </ActionsButton>
     );
 }
 

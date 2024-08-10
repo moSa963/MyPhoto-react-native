@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, ActivityIndicator } from "react-native";
 import { useRequest } from "@/hooks/RequestContext";
 import { useTheme } from "@/hooks/ThemeContext";
-import ButtonActions from "@/components/Buttons/ButtonActions";
+import ActionsButton from "@/components/Buttons/ActionsButton";
 
 
 const AcceptButton = ({ follow }) => {
@@ -18,7 +18,7 @@ const AcceptButton = ({ follow }) => {
     }
 
     return (
-        <ButtonActions style={{ borderRadius: 10, height: 40 }}
+        <ActionsButton style={{ borderRadius: 10, height: 40 }}
             onPress={handlePress}
             effectWidth={1}
             index={index}>
@@ -31,7 +31,7 @@ const AcceptButton = ({ follow }) => {
             <View style={{ backgroundColor: '#55ff5555', width: '100%', height: 40, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ color: theme.colors.text }}>Accepted</Text>
             </View>
-        </ButtonActions>
+        </ActionsButton>
     );
 }
 
