@@ -83,8 +83,9 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 25,
         elevation: 5,
-        maxHeight: '50%',
-        width: '95%',
+        minHeight: '30%',
+        maxHeight: '60%',
+        width: '90%',
     }
 });
 
