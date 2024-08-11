@@ -40,7 +40,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
             ...auth,
             login: async (user: Auth) => login(request, setAuth, auth, user),
             register: async (user: Auth) => register(request, setAuth, auth, user),
-            logout: async () => logout(request, auth),
+            logout: () => logout(setAuth),
         }}>
             {children}
         </Context.Provider>
@@ -78,18 +78,12 @@ export const register = async (request: any, setAuth: any, auth: AuthState, user
     return await handelRequest(() => request("api/users/register/", "POST", form), auth, setAuth)
 }
 
-
-export const logout = async (setAuth: any, auth: AuthState) => {
-    if (auth.status == "waiting") return;
-
+export const logout = async (setAuth: any) => {
     setAuth({ status: "waiting", errors: null, user: null });
-
     await SecureStore.deleteItemAsync('access_key');
     await SecureStore.deleteItemAsync('refresh_key');
-
     setAuth({ status: "unauthenticated", errors: null, user: null });
 }
-
 
 const handelRequest = async (request: any, auth: AuthState, setAuth: any) => {
     if (auth.status == "waiting") return;
@@ -102,10 +96,9 @@ const handelRequest = async (request: any, auth: AuthState, setAuth: any) => {
         const js = await response.json();
         await SecureStore.setItemAsync('access_key', js.access);
         await SecureStore.setItemAsync('refresh_key', js.refresh);
-        return setAuth({ status: "authenticated", errors: null, user: js });
+        return setAuth({ status: "authenticated", errors: null, user: js.user });
     } else if (response.status === 400) {
-        const js = await response.json();
-        return setAuth({ status: "unauthenticated", errors: js, user: null });
+        return setAuth({ status: "unauthenticated", errors: null, user: null });
     }
 
     setAuth({ status: "unauthenticated", errors: { "error": response.statusText }, user: null });
