@@ -3,18 +3,15 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import AuthProvider, { useAuth, AuthStatus } from '../hooks/AuthContext';
+import AuthProvider, { useAuth } from '../hooks/AuthContext';
 import RequestProvider from '../hooks/RequestContext';
 import ErrorCardProvider from '../hooks/ErrorContext';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import ThemeProvider from '@/hooks/ThemeContext'
+import ThemeProvider, { useTheme } from '@/hooks/ThemeContext'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
@@ -34,16 +31,36 @@ export default function RootLayout() {
       <ErrorCardProvider>
         <RequestProvider>
           <AuthProvider>
-            <Stack>
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen name="auth" options={{ headerShown: false }} />
-              <Stack.Screen name="posts" />
-              <Stack.Screen name="users" />
-              <Stack.Screen name="+not-found" />
-            </Stack>
+            <Screens />
           </AuthProvider>
         </RequestProvider>
       </ErrorCardProvider>
     </ThemeProvider>
+  );
+}
+
+
+const Screens = () => {
+  const { theme } = useTheme();
+
+  return (
+    <Stack
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: theme.colors.card
+        },
+        contentStyle: {
+          backgroundColor: theme.colors.background
+        },
+        headerTintColor: theme.colors.text,
+        navigationBarColor: theme.colors.card,
+      }}
+    >
+      <Stack.Screen name="(tabs)" options={{ headerShown: false, }} />
+      <Stack.Screen name="auth" options={{ headerShown: false }} />
+      <Stack.Screen name="posts" />
+      <Stack.Screen name="users" />
+      <Stack.Screen name="+not-found" />
+    </Stack>
   );
 }
