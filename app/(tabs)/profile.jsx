@@ -43,7 +43,7 @@ const Profile = () => {
         router.push(`/posts/${post.id}`);
     }
 
-    const handleReferesh = () => {
+    const handleRefresh = () => {
         getUser(request, auth.user.username, setUser, setIsPrivate);
     }
 
@@ -72,7 +72,7 @@ const Profile = () => {
             </BottomCard>
 
             <PostList onShowPost={handleShowPost}
-                onReferesh={handleReferesh}
+                onRefresh={handleRefresh}
                 user={user}
                 ListHeaderComponent={<UserBanner profile={true} user={user} theme={theme} anim={anim} navigation={navigation} />}
                 onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: anim } } }], { useNativeDriver: false })}
