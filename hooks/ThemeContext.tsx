@@ -2,7 +2,13 @@ import React, { createContext, type PropsWithChildren } from "react";
 import { DefaultTheme, DarkTheme, type Theme as NativeTheme } from "@react-navigation/native";
 
 type ThemeType = "light" | "dark";
-export type Theme = NativeTheme & { type: ThemeType, alpha: typeof alpha }
+export type Theme = NativeTheme & {
+    type: ThemeType,
+    alpha: typeof alpha,
+    colors: NativeTheme['colors'] & {
+        caption: string;
+    }
+}
 
 const alpha = (color: string, alpha: number) => {
     return color.split('(').join('a(').split(')').join(',' + alpha + ')');
@@ -10,12 +16,20 @@ const alpha = (color: string, alpha: number) => {
 
 export const Dark: Theme = {
     ...DarkTheme,
+    colors: {
+        ...DarkTheme.colors,
+        caption: "#999999"
+    },
     type: "dark",
     alpha: alpha,
 }
 
 export const Light: Theme = {
     ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        caption: "#999999"
+    },
     type: "light",
     alpha: alpha,
 }
