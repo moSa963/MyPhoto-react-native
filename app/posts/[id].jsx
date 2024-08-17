@@ -117,7 +117,7 @@ const ShowPost = () => {
                     <PostCard post={post} />
                 </GestureHandlerRootView>
 
-                <CommentInput post={post} flex={1} />
+                <CommentInput post={post} />
 
                 {
                     comments.map((e, i) => <Comment key={i} comment={e} onPress={showUser} onDelete={handleDelete} />)

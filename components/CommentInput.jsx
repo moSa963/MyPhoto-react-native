@@ -18,7 +18,7 @@ const CommentInput = ({ post }) => {
 
     return (
         <View style={styles.root}>
-            <TextInput flex={1} onChangeText={(input) => setContent(input)} placeholder="Comment..." value={content} />
+            <TextInput style={{ flex: 1 }} onChangeText={(input) => setContent(input)} placeholder="Comment..." value={content} />
             <Button onPress={handleSend} >
                 <Text style={{ color: theme.colors.text }} >Send</Text>
             </Button>
