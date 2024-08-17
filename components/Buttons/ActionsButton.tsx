@@ -7,7 +7,7 @@ type ActionsButtonProps = Omit<ButtonProps, "onPress"> & {
     onPress?: (i: number) => void
 }
 
-const ActionsButton = ({ index, style, onPress, children }: ActionsButtonProps) => {
+const ActionsButton = ({ index, style, onPress, children, ...rest }: ActionsButtonProps) => {
     const anim = React.useRef(new Animated.Value(0)).current;
     const [offset, setOffset] = React.useState(0);
 
@@ -21,6 +21,7 @@ const ActionsButton = ({ index, style, onPress, children }: ActionsButtonProps) 
 
     return (
         <Button
+            {...rest}
             style={[{ height: 35 }, style]}
             onPress={() => onPress && onPress(index)} >
             <Animated.View style={{

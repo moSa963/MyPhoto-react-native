@@ -2,8 +2,9 @@ import React from "react";
 import { ActivityIndicator, ViewProps } from "react-native";
 import { useTheme } from "@/hooks/ThemeContext";
 import ActionsButton, { ActionsButtonItem } from "./ActionsButton";
+import { ButtonProps } from "./Button";
 
-export type LoadingButtonProps = ViewProps & {
+export type LoadingButtonProps = ButtonProps & {
     onPress?: () => void
     processing?: boolean
 }
