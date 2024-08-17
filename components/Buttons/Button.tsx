@@ -3,16 +3,22 @@ import { Pressable, StyleSheet, View, ViewProps } from "react-native";
 import { useTheme } from "@/hooks/ThemeContext";
 
 export type ButtonProps = ViewProps & {
-    onPress: () => void
+    onPress: () => void,
+    variant?: "border" | "fill" | "none",
 }
 
-const Button = ({ children, style, onPress, ...rest }: ButtonProps) => {
+const Button = ({ children, style, onPress, variant = "border", ...rest }: ButtonProps) => {
     const { theme } = useTheme();
 
     return (
-        <Pressable onPress={onPress}>
+        <Pressable onPress={onPress} >
             {({ pressed }) => (
-                <View {...rest} style={[{ ...styles.root, opacity: pressed ? 0.5 : 1, borderColor: theme.colors.border, overflow: "hidden" }, style]}>
+                <View {...rest} style={[styles.root, {
+                    opacity: pressed ? 0.5 : 1,
+                    borderColor: theme.colors.border,
+                    borderWidth: variant == "border" ? 1 : 0,
+                    backgroundColor: theme.alpha(theme.colors.primary, variant == "fill" ? 0.5 : 0),
+                }, style]}>
                     {children}
                 </View>
             )}
@@ -25,7 +31,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        overflow: "hidden",
     }
 });
 
