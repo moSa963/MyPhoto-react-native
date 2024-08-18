@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import TextInput from "@/components/TextInput";
 import { useAuth } from "@/hooks/AuthContext";
 import { Validator } from "@/utils/Validator";
@@ -34,31 +34,35 @@ const LoginCard = () => {
     }
 
     return (
-        <ScrollView contentContainerStyle={styles.root}
-            nestedScrollEnabled={true}
-            showsVerticalScrollIndicator={false}
-            overScrollMode="never"
-        >
-            <TextInput placeholder="Username..."
-                error={errors?.username}
-                onChangeText={(text) => handleChange('username', text)} />
+        <View style={styles.root}>
+            <ScrollView
+                nestedScrollEnabled={true}
+                showsVerticalScrollIndicator={false}
+                overScrollMode="never"
+            >
+                <TextInput placeholder="Username..."
+                    error={errors?.username}
+                    onChangeText={(text) => handleChange('username', text)} />
 
-            <TextInput placeholder="Password"
-                error={errors?.password}
-                secureTextEntry
-                textContentType="password"
-                onChangeText={(text) => handleChange('password', text)} />
+                <TextInput placeholder="Password"
+                    error={errors?.password}
+                    secureTextEntry
+                    textContentType="password"
+                    onChangeText={(text) => handleChange('password', text)} />
 
-            <LoadingButton processing={auth.status == "waiting" ? true : false} onPress={handlePress}>
+
+            </ScrollView>
+            <LoadingButton variant="fill" processing={auth.status == "waiting" ? true : false} onPress={handlePress}>
                 <Text>Login</Text>
             </LoadingButton>
-        </ScrollView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     root: {
-        padding: 30,
+        padding: 15,
+        flex: 1
     },
     button: {
         width: '100%',
