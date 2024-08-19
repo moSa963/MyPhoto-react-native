@@ -2,7 +2,7 @@ import React from "react";
 import { Animated, View, ViewProps } from "react-native";
 import Button, { ButtonProps } from "./Button";
 
-type ActionsButtonProps = Omit<ButtonProps, "onPress"> & {
+export type ActionsButtonProps = Omit<ButtonProps, "onPress"> & {
     index: number,
     onPress?: (i: number) => void
 }
@@ -22,7 +22,7 @@ const ActionsButton = ({ index, style, onPress, children, ...rest }: ActionsButt
     return (
         <Button
             {...rest}
-            style={[{ height: 35 }, style]}
+            style={[{ height: 35, padding: 0 }, style]}
             onPress={() => onPress && onPress(index)} >
             <Animated.View style={{
                 width: '100%', height: "100%",
