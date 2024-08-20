@@ -16,7 +16,7 @@ const PaginationList = ({ url, onScroll, ListHeaderComponent, onRefresh, style, 
 
     React.useEffect(() => {
         loadData(request, url, setList, setNext, setRefreshing);
-    }, [request]);
+    }, [request, url]);
 
     const handleRefresh = () => {
         loadData(request, url, setList, setNext, setRefreshing);
