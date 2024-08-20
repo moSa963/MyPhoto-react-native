@@ -7,15 +7,22 @@ interface AvatarProps {
     onPress?: () => void,
     style?: StyleProp<ViewStyle>,
     uri: string,
-    variant?: "circle" | "square"
+    variant?: "circle" | "square",
+    size?: "large" | "medium" | "small"
 }
 
-const Avatar = ({ onPress, style, uri, variant }: AvatarProps) => {
+const sizes = {
+    "large": 75,
+    "medium": 50,
+    "small": 40,
+}
+
+const Avatar = ({ onPress, style, uri, variant, size = "medium" }: AvatarProps) => {
     const { theme } = useTheme();
 
     const defaultStyle: typeof style = {
-        width: 50,
-        height: 50,
+        width: sizes[size],
+        height: sizes[size],
         borderWidth: 2,
         borderColor: theme.colors.border,
         borderRadius: variant == "circle" ? 9999 : 15,
