@@ -4,13 +4,13 @@ import { Request, useRequest } from "@/hooks/RequestContext";
 import { useTheme } from "@/hooks/ThemeContext";
 import ActionsButton, { ActionsButtonItem, ActionsButtonProps } from "@/components/Buttons/ActionsButton";
 import ThemedText from "./ThemedText";
-import Follow from "@/models/Follow";
+import User from "@/models/User";
 
 type AcceptButtonProps = Omit<ActionsButtonProps, "index"> & {
-    follow: Follow
+    user: User
 }
 
-const AcceptButton = ({ follow, style, ...rest }: AcceptButtonProps) => {
+const AcceptButton = ({ user, style, ...rest }: AcceptButtonProps) => {
     const [index, setIndex] = React.useState(1);
     const { theme } = useTheme();
     const request = useRequest();
@@ -19,7 +19,7 @@ const AcceptButton = ({ follow, style, ...rest }: AcceptButtonProps) => {
         if (index !== 1) return;
 
         setIndex(0);
-        setIndex(await acceptRequest(request, follow.user.username));
+        setIndex(await acceptRequest(request, user.username));
     }
 
     return (
