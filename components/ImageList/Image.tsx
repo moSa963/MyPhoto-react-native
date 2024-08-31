@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageStyle, Image as ReactImage, StyleProp } from "react-native";
+import { ImageStyle, Image as ReactImage, StyleProp, View } from "react-native";
 import { Image as SvgImage } from "react-native-svg";
 import WaitingCard from "@/components/WaitingCard";
 import { useRequest } from "@/hooks/RequestContext";
@@ -23,7 +23,11 @@ const Image = ({ source, href, svg = false, contentFit = "cover", style, onImage
         loadImage(request, href, onImageLoaded || setImage);
     }, [source, href]);
 
-    if (!source && !image) return <WaitingCard />;
+    if (!source && !image) {
+        return <View style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <WaitingCard />
+        </View>
+    }
 
     const props = {
         fadeDuration: 0,
