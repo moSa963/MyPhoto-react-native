@@ -1,19 +1,37 @@
-import React from 'react';
-import { StyleSheet, View, Text, Animated } from 'react-native';
-import { useAuth } from '@/hooks/AuthContext';
+import React, { useMemo } from 'react';
+import { StyleSheet, View, Animated, ViewProps } from 'react-native';
 import { BASE_URL } from '@/http/HttpRequest';
 import { numberToStr } from '@/utils/numberToStr';
 import Button from '@/components/Buttons/Button';
 import FollowButton from '@/components/FollowButton';
-import Image from '@/components/ImageList/Image';
+import ThemedText from '@/components/ThemedText';
 import { useRouter } from 'expo-router';
+import Avatar from './Avatar';
+import User from '@/models/User';
+import { useAuth } from '@/hooks/AuthContext';
 
-const UserBanner = ({ theme, anim, user, profile }) => {
-    const auth = useAuth();
+type UserBannerProps = ViewProps & {
+    anim: Animated.Value,
+    user: User,
+}
+
+const UserBanner = ({ anim, user }: UserBannerProps) => {
     const router = useRouter();
+    const auth = useAuth();
+    const status = useMemo(() => {
+        if (user.username === auth.user?.username) {
+            return "profile";
+        } else if (!user.private || user.following_status == true) {
+            return "public";
+        }
+        return "private";
+    }, [user, auth.user]);
 
+    const handleShowUsers = (type: string) => {
+        if (status == "private") {
+            return;
+        }
 
-    const handleShowUsers = (type) => {
         router.push(`/users?username=${user.username}&type=${type}`);
     }
 
@@ -29,29 +47,28 @@ const UserBanner = ({ theme, anim, user, profile }) => {
                 ]
             }}>
             <View style={styles.head}>
-                <Image href={`${BASE_URL}api/users/${user.username}/image`}
-                    style={{ ...styles.img, borderColor: theme.colors.border }}
-                />
+                <Avatar uri={`${BASE_URL}api/users/${user.username}/image`} size='large' />
+
                 <View style={styles.headContent}>
-                    <Text style={{ color: theme.colors.text }}>{user.first_name + " " + user.last_name}</Text>
-                    <View style={{ felx: 1, justifyContent: 'space-evenly', flexDirection: 'row', paddingVertical: 25, }}>
-                        <Button color={theme.colors.primary} onPress={() => handleShowUsers("followers")}>
-                            <Text style={{ color: theme.colors.text }}>FOLLOWERS</Text>
-                            <Text style={{ color: theme.colors.text }}>{numberToStr(user.followers_count)}</Text>
+                    <ThemedText type="subtitle">{`${user.first_name} ${user.last_name}`}</ThemedText>
+                    <View style={{ flex: 1, justifyContent: 'space-evenly', flexDirection: 'row', paddingVertical: 25, }}>
+                        <Button onPress={() => handleShowUsers("followers")}>
+                            <ThemedText>followers</ThemedText>
+                            <ThemedText>{numberToStr(user.followers_count)}</ThemedText>
                         </Button>
-                        <Button color={theme.colors.primary} onPress={() => handleShowUsers("following")}>
-                            <Text style={{ color: theme.colors.text }}>FOLLOWING</Text>
-                            <Text style={{ color: theme.colors.text }}>{numberToStr(user.following_count)}</Text>
+                        <Button onPress={() => handleShowUsers("following")}>
+                            <ThemedText>following</ThemedText>
+                            <ThemedText>{numberToStr(user.following_count)}</ThemedText>
                         </Button>
                     </View>
                 </View>
             </View>
             {
-                profile ?
+                status == "profile" ?
                     <Button onPress={() => handleShowUsers("requests")}>
-                        <Text style={{ color: theme.colors.text }}>Requests</Text>
+                        <ThemedText>Requests</ThemedText>
                     </Button>
-                    : <FollowButton auth={auth} theme={theme} user={user} />
+                    : <FollowButton user={user} />
             }
         </Animated.View>
     );
@@ -59,12 +76,14 @@ const UserBanner = ({ theme, anim, user, profile }) => {
 
 const styles = StyleSheet.create({
     root: {
+        position: "relative",
         padding: 10,
         width: '100%',
         borderBottomWidth: 0.2,
         overflow: 'hidden',
         marginBottom: 10,
         zIndex: 25,
+        minHeight: 200
     },
     head: {
         flex: 1,
@@ -75,13 +94,6 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 10,
     },
-    img: {
-        width: 75,
-        height: 75,
-        borderWidth: 2,
-        borderRadius: 25,
-        overflow: 'hidden'
-    }
 });
 
 
