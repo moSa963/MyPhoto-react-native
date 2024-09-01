@@ -7,7 +7,7 @@ const WaitingCard = ({ style, ...rest }: ViewProps) => {
     const { theme } = useTheme();
 
     return (
-        <View {...rest} style={[style, { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.colors.background }]}>
+        <View {...rest} style={[style, { flex: 1, width: "100%", height: "100%", justifyContent: 'center', alignItems: 'center', backgroundColor: theme.colors.background }]}>
             <ActivityIndicator size="large" color={theme.colors.primary} />
         </View>
     )
