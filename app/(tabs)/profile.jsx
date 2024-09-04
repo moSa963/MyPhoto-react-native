@@ -74,7 +74,7 @@ const Profile = () => {
             <PostList onShowPost={handleShowPost}
                 onRefresh={handleRefresh}
                 user={user}
-                ListHeaderComponent={<UserBanner profile={true} user={user} theme={theme} anim={anim} navigation={navigation} />}
+                ListHeaderComponent={<UserBanner user={user} anim={anim} />}
                 onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: anim } } }], { useNativeDriver: false })}
             />
         </View>
@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
 });
 
 const getUser = async (request, username, setUser, setIsPrivate) => {
-
     const res = await request("api/users/" + username);
 
     if (res.ok) {
@@ -104,7 +103,6 @@ const getUser = async (request, username, setUser, setIsPrivate) => {
         setIsPrivate(js.private);
         setUser(js);
     }
-
 }
 
 const startPicker = async (onUploaded) => {
@@ -116,7 +114,6 @@ const startPicker = async (onUploaded) => {
 }
 
 const imageFileForm = (image) => {
-    const form = new FormData();
     const [type] = image[0].uri.split('.').reverse();
 
     const file = {
