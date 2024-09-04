@@ -5,20 +5,17 @@ import UserList from "@/components/UsersList/UserList";
 import { useTheme } from "@/hooks/ThemeContext";
 
 
-const Search = ({ navigation }) => {
+const Search = () => {
     const [searchKey, setSearchKey] = React.useState(null);
     const { theme } = useTheme();
 
     return (
         <View style={styles.root}>
-            <View style={{ ...styles.searchBar, backgroundColor: theme.colors.card }}>
+            <View style={[styles.searchBar, { backgroundColor: theme.colors.card }]}>
                 <SearchBar onTextChange={setSearchKey} />
             </View>
             {
-                searchKey &&
-                <UserList navigation={navigation}
-                    loader={(request, setList, setNext) => getUsers(request, setList, setNext, searchKey)}
-                    loaderNext={getNext} />
+                searchKey && <UserList url={`api/users/list?key=${searchKey}`} />
             }
         </View>
     );
@@ -36,33 +33,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     }
 });
-
-const getUsers = async (request, setList, setNext, key) => {
-
-    const res = await request(`api/users/list?key=${key}`);
-
-    if (res.ok) {
-        const js = await res.json();
-        setNext(js.next);
-        setList(js.results);
-    }
-
-}
-
-const getNext = async (request, next, setList, setNext, setProcessing) => {
-    if (!next) return;
-
-    setProcessing(true);
-
-    const res = await request(next);
-
-    if (res.ok) {
-        const js = await res.json();
-        setNext(js.next);
-        setList(e => ([...e, ...js.results]));
-    }
-
-    setProcessing(false);
-}
 
 export default Search;
