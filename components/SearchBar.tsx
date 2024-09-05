@@ -1,11 +1,12 @@
 import React from "react";
-import { View } from "react-native";
-import { useTheme } from "@/hooks/ThemeContext";
+import { View, ViewProps } from "react-native";
 import TextInput from "@/components/TextInput";
 
+export type SearchBarProps = ViewProps & {
+    onTextChange: (key: string | null) => void,
+}
 
-const SearchBar = ({ onTextChange, ...rest }) => {
-    const { theme } = useTheme();
+const SearchBar = ({ onTextChange, ...rest }: SearchBarProps) => {
     const [text, setText] = React.useState("");
 
     React.useEffect(() => {
@@ -18,7 +19,7 @@ const SearchBar = ({ onTextChange, ...rest }) => {
 
     return (
         <View {...rest}>
-            <TextInput placeholder="Search..." theme={theme} onChangeText={setText} />
+            <TextInput placeholder="Search..." onChangeText={setText} />
         </View>
     );
 }
