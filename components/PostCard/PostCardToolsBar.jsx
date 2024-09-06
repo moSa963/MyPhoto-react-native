@@ -12,7 +12,7 @@ const PostCardToolsBar = ({ post, index, }) => {
 
     return (
         <View style={styles.root}>
-            <Like color={theme.colors.text} size={25} item={post} />
+            <Like url={`api/posts/${post.id}/likes/`} likesCount={post.likes_count} initValue={post.liked} />
             <ListCounter count={post.images.length} index={index} color={theme.colors.text} />
             <View style={{ display: 'flex', flexDirection: 'row' }}>
                 <MaterialCommunityIcons name="comment-text-outline" color={theme.colors.text} size={25} />

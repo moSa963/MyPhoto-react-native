@@ -32,7 +32,7 @@ const Comment = ({ comment, onPress, onDelete, style, ...rest }: CommentProps) =
                 <ThemedText >{comment.content}</ThemedText>
             </View>
             <View>
-                <Like item={comment} type="comment" color={theme.colors.text} size={20} />
+                <Like url={`api/comments/${comment.id}/likes/`} likesCount={comment.likes_count} initValue={comment.liked} size="small" />
 
             </View>
         </View>
