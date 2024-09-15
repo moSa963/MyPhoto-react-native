@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { View, StyleSheet, Animated } from "react-native";
 import { useAuth } from "@/hooks/AuthContext";
-import { useTheme } from "@/hooks/ThemeContext";
 import PostList from "@/components/PostsGallery/PostList";
 import UserBanner from "@/components/UserBanner";
 import { Request, useRequest } from "@/hooks/RequestContext";
@@ -12,8 +11,6 @@ import PrivateIndicator from "@/components/PrivateIndicator";
 import User from "@/models/User";
 
 const ShowUser = () => {
-    const { theme } = useTheme();
-    const [settingsCard, setSettingsCard] = React.useState(false);
     const anim = React.useRef(new Animated.Value(0)).current;
     const [user, setUser] = React.useState<User | null>();
     const auth = useAuth();
