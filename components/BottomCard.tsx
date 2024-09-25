@@ -3,16 +3,17 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { View, StyleSheet, Dimensions, ViewProps } from "react-native";
 import { Gesture, GestureDetector, GestureHandlerRootView, ScrollView } from "react-native-gesture-handler";
-import Animated, { interpolate, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import Animated, { interpolate, runOnJS, useAnimatedReaction, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 type BottomCardProps = ViewProps & {
     footer?: React.ReactElement,
+    onClosed?: () => void,
     open: boolean,
 }
 
-const BottomCard = ({ children, style, open, footer }: BottomCardProps) => {
+const BottomCard = ({ children, style, open, footer, onClosed }: BottomCardProps) => {
     const { theme } = useTheme();
-    const height = Dimensions.get("window").height * 0.75;
+    const height = Dimensions.get("window").height * 0.95;
 
     const states = {
         up: height,
@@ -22,7 +23,7 @@ const BottomCard = ({ children, style, open, footer }: BottomCardProps) => {
         down: 0,
     };
 
-    const trans = useSharedValue(1);
+    const trans = useSharedValue(10);
 
     React.useEffect(() => {
         trans.value = withTiming(open ? states.mid : states.down);
@@ -30,7 +31,7 @@ const BottomCard = ({ children, style, open, footer }: BottomCardProps) => {
 
     const rootStyle = useAnimatedStyle(() => {
         return {
-            display: trans.value === 0 ? "none" : "flex",
+            display: trans.value <= 0 ? "none" : "flex",
             backgroundColor: `rgba(0, 0, 0, ${interpolate(trans.value, [0, states.mid], [0, 0.5])})`
         }
     });
@@ -62,7 +63,18 @@ const BottomCard = ({ children, style, open, footer }: BottomCardProps) => {
             }
         })
 
+    const handleOnClosed = () => {
+        onClosed && onClosed();
+    };
 
+    useAnimatedReaction(
+        () => trans.value,
+        (cup, pre) => {
+            if (pre != cup && cup <= 0) {
+                runOnJS(handleOnClosed)();
+            }
+        }
+    );
     return (
         <Animated.View style={[{ position: "absolute", width: "100%", height: "100%", zIndex: 10 }, rootStyle, style]}>
             <GestureHandlerRootView style={[{ width: "100%", height: "100%" }]} >
