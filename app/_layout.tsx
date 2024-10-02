@@ -7,6 +7,7 @@ import AuthProvider, { useAuth } from '../hooks/AuthContext';
 import RequestProvider from '../hooks/RequestContext';
 import ErrorCardProvider from '../hooks/ErrorContext';
 import ThemeProvider, { useTheme } from '@/hooks/ThemeContext'
+import BottomCardProvider from '@/hooks/BottomCardContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -31,7 +32,9 @@ export default function RootLayout() {
       <ErrorCardProvider>
         <RequestProvider>
           <AuthProvider>
-            <Screens />
+            <BottomCardProvider>
+              <Screens />
+            </BottomCardProvider>
           </AuthProvider>
         </RequestProvider>
       </ErrorCardProvider>
