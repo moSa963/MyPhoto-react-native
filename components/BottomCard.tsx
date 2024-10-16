@@ -2,16 +2,15 @@ import { useTheme } from "@/hooks/ThemeContext";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { View, StyleSheet, Dimensions, ViewProps } from "react-native";
-import { Gesture, GestureDetector, GestureHandlerRootView, ScrollView } from "react-native-gesture-handler";
+import { Gesture, GestureDetector, GestureHandlerRootView } from "react-native-gesture-handler";
 import Animated, { interpolate, runOnJS, useAnimatedReaction, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 type BottomCardProps = ViewProps & {
-    footer?: React.ReactElement,
     onClosed?: () => void,
     open: boolean,
 }
 
-const BottomCard = ({ children, style, open, footer, onClosed }: BottomCardProps) => {
+const BottomCard = ({ children, style, open, onClosed }: BottomCardProps) => {
     const { theme } = useTheme();
     const height = Dimensions.get("window").height * 0.95;
 
@@ -89,12 +88,8 @@ const BottomCard = ({ children, style, open, footer, onClosed }: BottomCardProps
                                 <Ionicons name="remove" size={35} />
                             </View>
 
-                            <ScrollView style={{ width: "100%", flex: 1 }} >
+                            <View style={{ width: "100%", flex: 1 }} >
                                 {children}
-                            </ScrollView>
-
-                            <View style={{ width: "100%" }}>
-                                {footer}
                             </View>
                         </Animated.View>
                     </View>
