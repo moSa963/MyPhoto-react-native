@@ -42,9 +42,7 @@ const Profile = () => {
         });
 
         if (user) {
-            bottomCard.setElement({
-                children: <SettingsCard user={user} updateUser={setUser} />
-            });
+            bottomCard.setElement(<SettingsCard user={user} updateUser={setUser} />);
         }
     }, [navigation, theme, user, auth]);
 

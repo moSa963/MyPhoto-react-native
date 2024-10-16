@@ -8,6 +8,7 @@ import { launchLibrary } from "@/utils/ImagePicker";
 import { ImagePickerAsset } from "expo-image-picker";
 import React from "react";
 import { StyleSheet, Switch, View, ViewProps } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 export type SettingsCardProps = ViewProps & {
     user: User,
@@ -21,7 +22,7 @@ const SettingsCard = ({ user, updateUser }: SettingsCardProps) => {
 
 
     return (
-        <React.Fragment>
+        <ScrollView>
             <View style={styles.cardItem}>
                 <ThemedText style={{ color: theme.colors.text, marginRight: 15 }}>DarkTheme</ThemedText>
                 <Switch value={theme.type === "dark" ? true : false} onChange={() => setThemeType(theme.type === "dark" ? "light" : "dark")} />
@@ -39,7 +40,7 @@ const SettingsCard = ({ user, updateUser }: SettingsCardProps) => {
             <Button onPress={auth.logout} >
                 <ThemedText style={{ color: theme.colors.text }}>LOGOUT</ThemedText>
             </Button>
-        </React.Fragment>
+        </ScrollView>
     );
 }
 
