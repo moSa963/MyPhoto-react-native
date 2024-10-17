@@ -63,7 +63,7 @@ const sendComment = async (request: Request, post: Post, content: any, onInput: 
 
     if (res?.ok) {
         const js = await res.json();
-        onInput(js?.data);
+        onInput(js);
     }
 }
 
