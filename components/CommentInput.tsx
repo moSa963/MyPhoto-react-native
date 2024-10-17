@@ -26,12 +26,14 @@ const CommentInput = ({ post, onInput }: CommentInputProps) => {
     return (
         <View style={styles.root}>
             <Avatar uri={`${BASE_URL}api/users/${post.user.username}/image`} variant="circle" />
-            <TextInput
-                style={{ flex: 1 }}
-                onChangeText={(input) => setContent(input)}
-                placeholder="Comment..."
-                value={content}
-            />
+            <View style={{ flex: 1, height: "100%", padding: 2 }}>
+                <TextInput
+                    style={{ flex: 1, fontSize: 17 }}
+                    onChangeText={(input) => setContent(input)}
+                    placeholder="Comment..."
+                    value={content}
+                />
+            </View>
             <Button onPress={handleSend} >
                 <Text style={{ color: theme.colors.text }} >Send</Text>
             </Button>
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderTopWidth: 1,
-        padding: 5,
+        paddingHorizontal: 5,
     }
 });
 
