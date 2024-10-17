@@ -14,10 +14,14 @@ const PostCardToolsBar = ({ post, index, }) => {
         <View style={styles.root}>
             <Like url={`api/posts/${post.id}/likes/`} likesCount={post.likes_count} initValue={post.liked} />
             <ListCounter count={post.images.length} index={index} color={theme.colors.text} />
-            <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <MaterialCommunityIcons name="comment-text-outline" color={theme.colors.text} size={25} />
-                <Text style={{ color: theme.colors.text }}>{numberToStr(post.comments_count)}</Text>
-            </View>
+            <Pressable >
+                {({ pressed }) => (
+                    <View style={{ display: 'flex', flexDirection: 'row', opacity: pressed ? 0.9 : 1 }}>
+                        <MaterialCommunityIcons name="comment-text-outline" color={theme.colors.text} size={25} />
+                        <Text style={{ color: theme.colors.text }}>{numberToStr(post.comments_count)}</Text>
+                    </View>
+                )}
+            </Pressable>
         </View>
     );
 }
