@@ -3,31 +3,35 @@ import BottomCard from "@/components/BottomCard";
 import { usePathname } from "expo-router";
 
 const Context = createContext<{
-    openCard: () => void,
-    setElement: (element: React.ReactNode) => void,
+    openCard: (element: React.ReactNode) => void,
 }>({
     openCard: () => null,
-    setElement: () => null,
 });
 
 const BottomCardProvider = ({ children }: PropsWithChildren) => {
     const [open, setOpen] = useState(false);
-    const [data, setData] = useState<React.ReactNode>();
+    const [data, setData] = useState<React.ReactNode>(null);
     const route = usePathname();
 
     React.useEffect(() => {
         setOpen(false);
     }, [route]);
 
-    const openCard = () => {
+    const handleClosed = () => {
+        setData(null);
+        setOpen(false);
+    }
+
+    const openCard = (element: React.ReactNode) => {
+        setData(element);
         setOpen(true);
     }
 
     return (
-        <Context.Provider value={{ openCard, setElement: setData }}>
+        <Context.Provider value={{ openCard }}>
             <BottomCard
                 open={open}
-                onClosed={() => setOpen(false)}
+                onClosed={handleClosed}
             >
                 {data}
             </BottomCard>

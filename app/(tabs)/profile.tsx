@@ -30,20 +30,20 @@ const Profile = () => {
     }, [auth]);
 
     React.useLayoutEffect(() => {
+        if (!user) {
+            return;
+        }
         navigation.setOptions({
             title: auth.user?.username,
             headerRight: () => (
                 <TouchableOpacity style={{ marginRight: 15 }}
-                    onPress={() => bottomCard.openCard()}
+                    onPress={() => bottomCard.openCard(<SettingsCard user={user} updateUser={setUser} />)}
                 >
                     <Ionicons name="settings-outline" size={25} color={theme.colors.text} />
                 </TouchableOpacity>
             ),
         });
 
-        if (user) {
-            bottomCard.setElement(<SettingsCard user={user} updateUser={setUser} />);
-        }
     }, [navigation, theme, user, auth]);
 
     const handleShowPost = (post: Post) => {
