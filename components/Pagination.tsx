@@ -23,7 +23,7 @@ const Pagination = ({ children, url }: Pagination) => {
     const request = useRequest();
 
     React.useEffect(() => {
-        loadData(request, url, setList, setNext, setRefreshing);
+        loadData(request, url, setList, setNext, setProcessing);
     }, [request, url]);
 
     const handleRefresh = () => {
