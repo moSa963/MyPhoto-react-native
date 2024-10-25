@@ -1,6 +1,7 @@
 import React, { createContext, useState, type PropsWithChildren } from "react";
 import BottomCard from "@/components/BottomCard";
-import { usePathname } from "expo-router";
+import { useFocusEffect, usePathname } from "expo-router";
+import { BackHandler } from "react-native";
 
 const Context = createContext<{
     openCard: (element: React.ReactNode) => void,
@@ -13,8 +14,25 @@ const BottomCardProvider = ({ children }: PropsWithChildren) => {
     const [data, setData] = useState<React.ReactNode>(null);
     const route = usePathname();
 
+    useFocusEffect(
+        React.useCallback(() => {
+            const goBack = () => {
+                if (!open) {
+                    return false;
+                }
+
+                handleClosed();
+                return true;
+            }
+
+            BackHandler.addEventListener("hardwareBackPress", goBack);
+
+            return () => BackHandler.removeEventListener("hardwareBackPress", goBack);
+        }, [open])
+    );
+
     React.useEffect(() => {
-        setOpen(false);
+        handleClosed();
     }, [route]);
 
     const handleClosed = () => {
