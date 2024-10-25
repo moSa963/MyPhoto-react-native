@@ -78,7 +78,7 @@ const PostCommentsCard = ({ post }: PostCommentsCardProps) => {
                             }
 
                             {
-                                next && <ActivityIndicator color={theme.colors.text} size="large" />
+                                (next || processing) && <ActivityIndicator color={theme.colors.text} size="large" />
                             }
                         </ScrollView>
                     )
